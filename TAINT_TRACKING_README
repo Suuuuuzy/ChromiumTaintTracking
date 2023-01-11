@@ -28,6 +28,18 @@ to get the code. Loosely, the steps are:
 
        sh src/build/install-build-deps.sh
 
+       /* 
+
+       Suzy: here I encounter errors related to i386 packages. Solved by adding i386 architecture:
+
+       sudo dpkg --add-architecture i386
+
+       sudo apt update
+
+       ref: https://askubuntu.com/questions/1147991/help-installing-steam
+
+       */
+
     4. Run hooks
 
        cd src
@@ -72,8 +84,29 @@ looking at the arguments that are passed to compilation. The sysroot flag may
 need to be changed depending on what system you're on.
 
   patch -p1 < v8/src/taint_tracking/capnp-diff.patch
+
+  /*
+
+  Suzy: this patch is for Capn' proto 0.5.3
+
+  the newest version does not need the patch
+
+  I got the newest github version on 1/6/2023
+
+
+  */
   # Change this to point to the installation directory
   export CHROMEDIR="/home/billy/docs/source/chromium_taint_tracking/src";
+
+  /*
+
+  Suzy: cuz I use newer Chromium, all the debian_wheezy_amd64-sysroot below should be substitued with debian_bullseye_amd64-sysroot
+
+  You should be able to see the supported sys name under CHROMEDIR/build/linux/
+
+  choose the one u use
+
+  */
 
   export SYSROOT="$CHROMEDIR/build/linux/debian_wheezy_amd64-sysroot"
   export CXX="$CHROMEDIR/third_party/llvm-build/Release+Asserts/bin/clang++";
@@ -100,6 +133,14 @@ need to be changed depending on what system you're on.
   sudo make install
 
 
+  /*
+  Suzy: some trouble shooting:
+  
+  https://github.com/capnproto/capnproto/pull/399/commits/0f1fd1938b19dccdb5dbfe9cb5177c4342a2a5b5
+
+  */
+
+
 
 Checking out code
 -----------------
@@ -112,7 +153,24 @@ cd <root>;
 gclient --runhooks
 
 gclient checkout 8d0c21dddbe95f83dc7323d749a9bcff9a84e020
+
+/*
+Suzy: 
+
+It should be git checkout here
+*/
+
 gclient sync --with_branch_heads
+
+/*
+Suzy:
+
+I encounter problem with gclient sync
+
+Don't know how to procced
+
+*/
+
 git apply /path/to/chromium_patch
 cd v8
 patch -p1 /path/to/v8_patch
