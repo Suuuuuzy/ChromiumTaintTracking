@@ -56,6 +56,11 @@ the libgcrypt11[versionstuff].deb file and then run:
 
   sudo dpkg -I libgcrypt11[versionstuff].deb
 
+   /* 
+
+   Suzy: Remember to use sudo or the .deb will not be installed (probably because there is libgcrypt20 pre-installed)
+
+   */
 
 Building capnp for chrome
 -------------------------
@@ -100,7 +105,7 @@ need to be changed depending on what system you're on.
 
   /*
 
-  Suzy: cuz I use newer Chromium, all the debian_wheezy_amd64-sysroot below should be substitued with debian_bullseye_amd64-sysroot
+  Suzy: I use newer Chromium, all the debian_wheezy_amd64-sysroot below should be substitued with debian_bullseye_amd64-sysroot
 
   You should be able to see the supported sys name under CHROMEDIR/build/linux/
 
