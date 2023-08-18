@@ -1,0 +1,408 @@
+diff --git a/BUILD.gn b/BUILD.gn
+diff --git a/TAINT_TRACKING_README b/TAINT_TRACKING_README
+diff --git a/src/arm/code-stubs-arm.cc b/src/arm/code-stubs-arm.cc
+diff --git a/src/arm64/code-stubs-arm64.cc b/src/arm64/code-stubs-arm64.cc
+diff --git a/src/code-stubs-hydrogen.cc b/src/code-stubs-hydrogen.cc
+diff --git a/src/code-stubs.cc b/src/code-stubs.cc
+diff --git a/src/crankshaft/OWNERS b/src/crankshaft/OWNERS
+diff --git a/src/crankshaft/hydrogen-instructions.h b/src/crankshaft/hydrogen-instructions.h
+diff --git a/src/crankshaft/hydrogen.cc b/src/crankshaft/hydrogen.cc
+diff --git a/src/crankshaft/hydrogen.h b/src/crankshaft/hydrogen.h
+diff --git a/src/crankshaft/lithium-codegen.cc b/src/crankshaft/lithium-codegen.cc
+diff --git a/src/flag-definitions.h b/src/flag-definitions.h
+diff --git a/src/full-codegen/full-codegen.cc b/src/full-codegen/full-codegen.cc
+diff --git a/src/full-codegen/full-codegen.h b/src/full-codegen/full-codegen.h
+diff --git a/src/full-codegen/x64/full-codegen-x64.cc b/src/full-codegen/x64/full-codegen-x64.cc
+diff --git a/src/heap/heap-inl.h b/src/heap/heap-inl.h
+diff --git a/src/heap/heap.cc b/src/heap/heap.cc
+diff --git a/src/mips/code-stubs-mips.cc b/src/mips/code-stubs-mips.cc
+diff --git a/src/mips64/code-stubs-mips64.cc b/src/mips64/code-stubs-mips64.cc
+diff --git a/src/ppc/code-stubs-ppc.cc b/src/ppc/code-stubs-ppc.cc
+diff --git a/src/s390/code-stubs-s390.cc b/src/s390/code-stubs-s390.cc
+diff --git a/src/x64/code-stubs-x64.cc b/src/x64/code-stubs-x64.cc
+diff --git a/src/x64/macro-assembler-x64.cc b/src/x64/macro-assembler-x64.cc
+diff --git a/src/x87/code-stubs-x87.cc b/src/x87/code-stubs-x87.cc
+diff --git a/src/ast/ast-value-factory.h b/src/ast/ast-value-factory.h
+class AstRawString final : public AstString {
+diff --git a/src/builtins/x64/builtins-x64.cc b/src/builtins/x64/builtins-x64.cc
+
+diff --git a/src/builtins/builtins-string.cc b/src/builtins/builtins-string.cc
+add some prototype funcs for string type
+Generate_StringFromCharCode not found
+in builtins-string-gen.cc
+not finished!
+
+
+purpose analysis:
+
+
+diff --git a/src/compiler/ast-graph-builder.cc b/src/compiler/ast-graph-builder.cc
+diff --git a/src/compiler/ast-graph-builder.h b/src/compiler/ast-graph-builder.h
+
+should be bytecodeGraphBuilder
+
+diff --git a/src/debug/liveedit.cc b/src/debug/liveedit.cc
+add one para for SourcePositionTableBuilder::AddPosition
+done
+
+
+diff --git a/src/builtins/builtins-function.cc b/src/builtins/builtins-function.cc
+done
+
+
+diff --git a/src/compiler-dispatcher/compiler-dispatcher-job.cc b/src/compiler-dispatcher/compiler-dispatcher-job.cc
+dont know where to add   
+parse_info_->set_function_token_position(shared->function_token_position());
+seems had been solved
+
+
+
+diff --git a/src/compiler/code-generator.cc b/src/compiler/code-generator.cc
+add one para for source_position_table_builder_.AddPosition
+done
+
+diff --git a/src/compiler/effect-control-linearizer.cc b/src/compiler/effect-control-linearizer.cc
+LowerStringFromCharCode -> LowerStringFromSingleCharCode
+done
+
+
+diff --git a/src/interpreter/bytecode-array-builder.cc b/src/interpreter/bytecode-array-builder.cc
+add one parameter for ForceExpressionPosition
+done
+
+diff --git a/src/interpreter/bytecode-array-writer.cc b/src/interpreter/bytecode-array-writer.cc
+add one para to source_position_table_builder()->AddPosition
+done
+
+
+diff --git a/src/interpreter/bytec ode-generator.cc b/src/interpreter/bytecode-generator.cc
+update BytecodeGenerator
+add GenerateTaintTrackingHook(expr); for functions that visit different types
+no VisitDoExpression
+done
+
+diff --git a/src/interpreter/bytecode-generator.h b/src/interpreter/bytecode-generator.h
+done
+
+diff --git a/src/interpreter/bytecode-pipeline.h b/src/interpreter/bytecode-pipeline.h
+in bytecode-source-info.h
+update definition of BytecodeSourceInfo and its infor
+no clone
+done
+
+diff --git a/src/snapshot/code-serializer.cc b/src/snapshot/code-serializer.cc
+done
+
+diff --git a/src/snapshot/deserializer.cc b/src/snapshot/deserializer.cc
+done 
+
+
+diff --git a/src/snapshot/serializer-common.cc b/src/snapshot/serializer-common.cc
+no need, already patched
+
+
+diff --git a/src/snapshot/serializer.cc b/src/snapshot/serializer.cc
+done
+add taint while serializing
+
+
+
+diff --git a/src/source-position-table.cc b/src/source-position-table.cc
+done
+diff --git a/src/source-position-table.h b/src/source-position-table.h
+done
+
+diff --git a/src/heap/spaces.cc b/src/heap/spaces.cc
+in new-spaces.cc
+done
+
+diff --git a/src/isolate.cc b/src/isolate.h
+done
+diff --git a/src/isolate.cc b/src/isolate.cc
+deal with exceptions and throws
+init, deinit of tainttracking, etc
+done
+
+
+diff --git a/src/isolate.h b/src/isolate.h
+define taint_tracking_data and define one internal variable
+done
+
+diff --git a/src/extensions/externalize-string-extension.cc b/src/extensions/externalize-string-extension.cc
+update function Externalize, to 
+MakeExternal 是在干啥来着
+
+
+diff --git a/src/external-reference-table.cc b/src/external-reference-table.cc
+call AddTaintTracking when init
+done
+diff --git a/src/external-reference-table.h b/src/external-reference-table.h
+add declaration of AddTaintTracking
+
+
+
+diff --git a/src/bootstrapper.cc b/src/bootstrapper.cc
+define some functions like __getTaint__, __checkTaint__, __setTaint__
+done
+diff --git a/src/bootstrapper.h b/src/bootstrapper.h
+class NativesExternalStringResource not found
+
+diff --git a/src/assembler.cc b/src/assembler.cc
+done
+diff --git a/src/assembler.cc b/src/assembler.h
+in external-reference.h
+done
+add one construction function for ExternalReference
+it is called Create in the new version
+
+diff --git a/src/frames.cc b/src/frames.cc
+done
+
+diff --git a/src/frames.h b/src/frames.h
+done 
+define two InfoForTaintLog funcs for the log of taints
+
+
+
+diff --git a/src/string-builder.cc b/src/string-builder.cc
+done
+
+diff --git a/src/string-builder.h b/src/string-builder.h
+in string-builder-inl.h
+done
+
+
+diff --git a/src/json-stringifier.cc b/src/json-stringifier.cc
+did not add type taint for dest->AppendCString("\\u");
+
+
+diff --git a/src/json-stringifier.h b/src/json-stringifier.h
+done
+
+
+
+diff --git a/src/json-parser.cc b/src/json-parser.cc
+parse json in JavaScript
+in new version: combine slowScan and scan together
+not sure
+
+
+diff --git a/src/parsing/parser.cc b/src/parsing/parser.cc
+in parser-info.cc
+done
+
+diff --git a/src/parsing/parser.h b/src/parsing/parser.h
+done
+not sure what   friend class tainttracking::AstSerializer; does in class Parser
+
+
+diff --git a/src/uri.cc b/src/uri.cc
+change some bool functions to int functions
+return different values for different situations
+
+
+
+diff --git a/src/globals.h b/src/globals.h
+/home/suzy/nwjs/src/v8/src/common/globals.h
+define namespace tainttracking, same level with v8
+
+diff --git a/src/api-arguments.cc b/src/api-arguments.cc
+/home/suzy/nwjs/src/v8/src/api/api-arguments.cc
+add DCHECK for tainttracking
+
+diff --git a/src/api.cc b/src/api.cc
+/home/suzy/nwjs/src/v8/src/api/api.cc
+define function SetTaintTrackingContextId
+LogInitializeNavigate
+WriteTaint
+
+
+diff --git a/src/assembler.h b/src/assembler.h
+/home/suzy/nwjs/src/v8/src/codegen/external-reference.h
+add one possible Create
+
+
+diff --git a/src/ast/scopeinfo.cc b/src/ast/scopeinfo.cc
+/home/suzy/nwjs/src/v8/src/objects/scope-info.cc
+int ScopeInfo::StackSlotCount() {
+  if (length() > 0) {
+    bool function_name_stack_slot =
+        FunctionVariableField::decode(Flags()) == STACK;
+    return
+      ((// Allocate space for symbolic information of context variables
+          tainttracking::TaintTracker::FromIsolate(GetIsolate())->
+          IsRewriteAstEnabled() ?
+          2 : 1) * StackLocalCount()) +
+      (function_name_stack_slot ? 1 : 0);
+  }
+  return 0;
+}
+not found in new file
+
+
+diff --git a/src/builtins/builtins.h b/src/builtins/builtins.h
+/home/suzy/nwjs/src/v8/src/builtins/builtins-definitions.h
+/home/suzy/nwjs/src/v8/src/builtins/builtins.h
+done
+
+diff --git a/src/code-stub-assembler.h b/src/code-stub-assembler.h
+/home/suzy/nwjs/src/v8/src/codegen/code-stub-assembler.h
+add deinition of IncrementAndStoreTaintInstanceCounter
+done
+
+diff --git a/src/code-stub-assembler.cc b/src/code-stub-assembler.cc
+/home/suzy/nwjs/src/v8/src/codegen/code-stub-assembler.cc
+no Node* CodeStubAssembler::AllocateSeqOneByteString(Node* context, Node* length) 
+found
+Node* CodeStubAssembler::AllocateSeqTwoByteString(Node* context, Node* length) {
+neither
+
+diff --git a/src/builtins/builtins-global.cc b/src/builtins/builtins-global.cc
+/home/suzy/nwjs/src/v8/src/builtins/builtins-global.cc
+done
+
+diff --git a/src/compiler.cc b/src/compiler.cc
+/home/suzy/nwjs/src/v8/src/codegen/compiler.cc
+bool Compiler::Analyze(ParseInfo* info) {
+not found
+
+diff --git a/src/contexts.cc b/src/contexts.cc
+/home/suzy/nwjs/src/v8/src/objects/contexts.cc
+done
+
+
+diff --git a/src/contexts.h b/src/contexts.h
+/home/suzy/nwjs/src/v8/src/objects/contexts.h
+done
+
+diff --git a/src/contexts-inl.h b/src/contexts-inl.h
+/home/suzy/nwjs/src/v8/src/objects/contexts-inl.h
+done
+
+diff --git a/src/execution.cc b/src/execution.cc
+/home/suzy/nwjs/src/v8/src/execution/execution.cc
+done
+tainttracking::RuntimeEnterSymbolicStackFrame
+and exit
+
+diff --git a/src/execution.h b/src/execution.h
+/home/suzy/nwjs/src/v8/src/execution/execution.h
+done
+adding something in the header file
+
+diff --git a/src/objects.cc b/src/objects.cc
+Handle<String> SeqString::Truncate(Handle<SeqString> string, int new_length) { in string.cc
+Handle<String> String::SlowFlatten(Handle<ConsString> cons, in string.cc
+bool String::MakeExternal in string.cc
+definition of AbstractCode methods in code.cc - int AbstractCode::SourcePositionWithTaintTrackingAstIndex(
+SharedFunctionInfo::InitFromFunctionLiteral in shared-function-info.cc
+MaybeHandle<Object> JSReceiver::ToPrimitive( in js-objects.cc
+
+diff --git a/src/objects.h b/src/objects.h
+class ScopeInfo : public FixedArray { in scope-info.h 
+class SeqOneByteString: public SeqString in string.h
+class Name: public HeapObject in name.h
+class AbstractCode : public HeapObject in code.h
+class SharedFunctionInfo: public HeapObject in shared-function-info.h
+
+no kFeedbackMetadataOffset
+  static const int kTaintTrackingNodeLabel =
+probably in shared-function-info.h
+no   static const int kSize = kHashFieldSlot + kPointerSize;
+probably in name.h
+don't know where we will be using   inline Resource* resource();
+because there's a mutable resource in new version
+
+diff --git a/src/objects-inl.h b/src/objects-inl.h
+not sure about ACCESSORS(SharedFunctionInfo, taint_node_label, Object, kTaintTrackingNodeLabel)
+
+
+diff --git a/src/v8.cc b/src/v8.cc
+done, add #include "src/taint_tracking.h"
+
+diff --git a/src/factory.cc b/src/factory.cc
+/home/suzy/nwjs/src/v8/src/heap/factory.cc
+no Handle<ExternalOneByteString> Factory::NewNativeSourceString(
+no Handle<String> ConcatStringContent(Handle<StringType> result,
+no MUST_USE_RESULT Handle<String> Factory::NewTwoByteInternalizedString(
+no MUST_USE_RESULT Handle<String> Factory::NewOneByteInternalizedSubString(
+do not understand why const Vector<const uint8_t>& str
+no Handle<String> Factory::NewInternalizedStringFromUtf8(Vector<const char> str,
+no NewOneByteInternalizedSubString
+no NewOneByteInternalizedString
+no NewTwoByteInternalizedString
+
+MaybeHandle<String> Factory::NewConsString(Handle<String> left in factory-base.cc
+MakeOrFindTwoCharacterString in factory-base.cc
+
+
+diff --git a/src/factory.h b/src/factory.h
+no Handle<String> Factory::NewInternalizedStringFromUtf8(Vector<const char> str,
+no NewOneByteInternalizedSubString
+no NewOneByteInternalizedString
+no NewTwoByteInternalizedString
+done
+
+diff --git a/test/cctest/BUILD.gn b/test/cctest/BUILD.gn
+diff --git a/test/cctest/cctest.gyp b/test/cctest/cctest.gyp
+diff --git a/test/cctest/heap/test-heap.cc b/test/cctest/heap/test-heap.cc
+diff --git a/test/cctest/test-api.cc b/test/cctest/test-api.cc
+diff --git a/test/cctest/test-heap-profiler.cc b/test/cctest/test-heap-profiler.cc
+diff --git a/test/cctest/test-log.cc b/test/cctest/test-log.cc
+diff --git a/test/cctest/test-regexp.cc b/test/cctest/test-regexp.cc
+diff --git a/test/cctest/test-serialize.cc b/test/cctest/test-serialize.cc
+diff --git a/test/cctest/test-strings.cc b/test/cctest/test-strings.cc
+diff --git a/test/cctest/test-taint-tracking.cc b/test/cctest/test-taint-tracking.cc
+done
+
+diff --git a/test/cctest/test-parsing.cc b/test/cctest/test-parsing.cc
+no class TestExternalResource:
+
+diff --git a/src/taint_tracking/ast_serialization.cc b/src/taint_tracking/ast_serialization.cc
+diff --git a/src/taint_tracking/ast_serialization.h b/src/taint_tracking/ast_serialization.h
+diff --git a/src/taint_tracking/capnp-diff.patch b/src/taint_tracking/capnp-diff.patch
+diff --git a/src/taint_tracking/json11.cc b/src/taint_tracking/json11.cc
+diff --git a/src/taint_tracking/json11.hpp b/src/taint_tracking/json11.hpp
+diff --git a/src/taint_tracking/log_listener.h b/src/taint_tracking/log_listener.h
+diff --git a/src/taint_tracking/object_versioner.cc b/src/taint_tracking/object_versioner.cc
+diff --git a/src/taint_tracking/object_versioner.h b/src/taint_tracking/object_versioner.h
+diff --git a/src/taint_tracking/picosha2.h b/src/taint_tracking/picosha2.h
+diff --git a/src/taint_tracking/picosha2.h b/src/taint_tracking/third_party/picosha2.h
+diff --git a/src/taint_tracking/protos/ast.capnp b/src/taint_tracking/protos/ast.capnp
+diff --git a/src/taint_tracking/protos/logrecord.capnp b/src/taint_tracking/protos/logrecord.capnp
+diff --git a/src/taint_tracking/symbolic_analysis.cc b/src/taint_tracking/symbolic_analysis.cc
+diff --git a/src/taint_tracking/symbolic_state.cc b/src/taint_tracking/symbolic_state.cc
+diff --git a/src/taint_tracking/symbolic_state.h b/src/taint_tracking/symbolic_state.h
+diff --git a/src/taint_tracking/taint_log_record.cc b/src/taint_tracking/taint_log_record.cc
+diff --git a/src/taint_tracking/taint_log_record.h b/src/taint_tracking/taint_log_record.h
+diff --git a/src/taint_tracking/taint_tracking.cc b/src/taint_tracking/taint_tracking.cc
+done
+
+diff --git a/src/taint_log_record.cc b/src/taint_log_record.cc
+diff --git a/src/taint_log_record.cc b/src/taint_tracking/taint_log_record.cc
+diff --git a/src/taint_log_record.h b/src/taint_log_record.h
+diff --git a/src/taint_log_record.h b/src/taint_tracking/taint_log_record.h
+diff --git a/src/taint_tracking-inl.h b/src/taint_tracking-inl.h
+diff --git a/src/taint_tracking.cc b/src/taint_tracking.cc
+diff --git a/src/taint_tracking.cc b/src/taint_tracking/taint_tracking.cc
+diff --git a/src/taint_tracking.h b/src/taint_tracking.h
+done
+
+diff --git a/src/runtime/runtime-scopes.cc b/src/runtime/runtime-scopes.cc
+done
+
+diff --git a/src/runtime/runtime-strings.cc b/src/runtime/runtime-strings.cc
+no RUNTIME_FUNCTION(Runtime_StringBuilderJoin) {
+no WriteRepeatToFlat
+no JoinSparseArrayWithSeparator
+no RUNTIME_FUNCTION(Runtime_SparseJoinWithSeparator) {
+MUST_USE_RESULT static Object* ConvertCaseHelper( in src/builtins/builtins-stirng.cc
+
+diff --git a/src/runtime/runtime.h b/src/runtime/runtime.h
+no   F(ToPrimitive, -1, 1)                              \
+
+diff --git a/src/runtime/runtime-compiler.cc b/src/runtime/runtime-compiler.cc
+diff --git a/src/runtime/runtime-function.cc b/src/runtime/runtime-function.cc
+diff --git a/src/runtime/runtime-internal.cc b/src/runtime/runtime-internal.cc
+diff --git a/src/runtime/runtime-object.cc b/src/runtime/runtime-object.cc
+diff --git a/src/runtime/runtime-regexp.cc b/src/runtime/runtime-regexp.cc

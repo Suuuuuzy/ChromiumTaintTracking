@@ -1,0 +1,45 @@
+# json-parser.cc
+a recursive parser in general
+
+ParseJson is the top function for processing of js json (I guess)
+it calls ParseJsonValue
+and deals with errors
+
+inside ParseJsonValue
+it calls ParseJsonString, ParseJsonNumber, ParseJsonObject, ParseJsonArray
+
+inside ParseJsonString
+return ScanJsonString<false>()
+
+inside ParseJsonInternalizedString
+return ScanJsonString<true>();
+
+inside ScanJsonString
+
+
+ok
+so inside json there might be numbers, strings, objects, or arrays
+but we only pay attention to the strings
+
+patch is inside SlowScanJsonString and ScanJsonString
+which is called by itself(recur) and 
+ScanJsonString
+in old version, what does ScanJsonString do?
+
+
+in new version
+ParseJsonString/ScanJsonString is ScanJsonString
+old: return ParseJsonString();
+new: value = MakeString(ScanJsonString(false));
+
+
+global variables?
+
+in new version, do we have something under ScanJsonString?
+probably need to update tainttracking::OnNewFromJsonString
+
+
+
+
+what does tainttracking::GetWriteableStringTaintData(*seq) do
+DisallowHeapAllocation no_gc

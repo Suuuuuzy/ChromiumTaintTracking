@@ -38,7 +38,10 @@ index 3f569585a7b7..88f3c4102151 100644
   public:
    explicit StaticV8ExternalOneByteStringResource(
        const base::StringPiece& buffer);
+
 diff --git a/net/proxy/proxy_resolver_v8.cc b/net/proxy/proxy_resolver_v8.cc
+a/services/proxy_resolver/proxy_resolver_v8.cc
+
 index 16ad61f74240..d9d98e05db40 100644
 --- a/net/proxy/proxy_resolver_v8.cc
 +++ b/net/proxy/proxy_resolver_v8.cc
@@ -62,7 +65,10 @@ index 16ad61f74240..d9d98e05db40 100644
   public:
    // |ascii| must be a NULL-terminated C string, and must remain valid
    // throughout this object's lifetime.
+
 diff --git a/third_party/WebKit/Source/bindings/core/v8/ScriptState.cpp b/third_party/WebKit/Source/bindings/core/v8/ScriptState.cpp
+/Users/susie/nwjs/src/third_party/blink/renderer/platform/bindings/script_state.cc
+ok
 index 86f55cf43657..b1e9578ba156 100644
 --- a/third_party/WebKit/Source/bindings/core/v8/ScriptState.cpp
 +++ b/third_party/WebKit/Source/bindings/core/v8/ScriptState.cpp
@@ -104,6 +110,7 @@ index 86f55cf43657..b1e9578ba156 100644
  ExecutionContext* ScriptState::getExecutionContext() const
  {
      v8::HandleScope scope(m_isolate);
+
 diff --git a/third_party/WebKit/Source/bindings/core/v8/ScriptState.h b/third_party/WebKit/Source/bindings/core/v8/ScriptState.h
 index 0274349640b0..8a0791aac399 100644
 --- a/third_party/WebKit/Source/bindings/core/v8/ScriptState.h
@@ -117,8 +124,15 @@ index 0274349640b0..8a0791aac399 100644
      ScriptValue getFromExtrasExports(const char* name);
  
  protected:
+
 diff --git a/third_party/WebKit/Source/bindings/core/v8/V8StringResource.cpp b/third_party/WebKit/Source/bindings/core/v8/V8StringResource.cpp
 index f4a208552a1c..c201ad12454b 100644
+ok
+I only see /Users/susie/nwjs/src/third_party/blink/renderer/bindings/core/v8/v8_string_resource.h
+no /Users/susie/nwjs/src/third_party/blink/renderer/bindings/core/v8/v8_string_resource.cc
+got it!
+/home/suzy/nwjs/src/third_party/blink/renderer/platform/bindings/string_resource.cc
+
 --- a/third_party/WebKit/Source/bindings/core/v8/V8StringResource.cpp
 +++ b/third_party/WebKit/Source/bindings/core/v8/V8StringResource.cpp
 @@ -27,6 +27,19 @@
@@ -176,8 +190,10 @@ index f4a208552a1c..c201ad12454b 100644
      return AtomicString(string);
  }
  
+
 diff --git a/third_party/WebKit/Source/bindings/core/v8/V8StringResource.h b/third_party/WebKit/Source/bindings/core/v8/V8StringResource.h
 index f7419ab3f72e..782aee338e25 100644
+fail
 --- a/third_party/WebKit/Source/bindings/core/v8/V8StringResource.h
 +++ b/third_party/WebKit/Source/bindings/core/v8/V8StringResource.h
 @@ -38,7 +38,7 @@ namespace blink {
@@ -244,8 +260,11 @@ index f7419ab3f72e..782aee338e25 100644
      size_t length() const override
      {
          return m_compressibleString.length();
+
 diff --git a/third_party/WebKit/Source/core/dom/Element.cpp b/third_party/WebKit/Source/core/dom/Element.cpp
 index 407edc3fa76f..f647d5699e61 100644
+/Users/susie/nwjs/src/third_party/blink/renderer/core/dom/element.cc
+ok, new
 --- a/third_party/WebKit/Source/core/dom/Element.cpp
 +++ b/third_party/WebKit/Source/core/dom/Element.cpp
 @@ -2570,16 +2570,32 @@ void Element::dispatchFocusOutEvent(const AtomicString& eventType, Element* newF
@@ -294,8 +313,11 @@ index 407edc3fa76f..f647d5699e61 100644
  void Element::setOuterHTML(const String& html, ExceptionState& exceptionState)
  {
      Node* p = parentNode();
+
 diff --git a/third_party/WebKit/Source/core/dom/Element.h b/third_party/WebKit/Source/core/dom/Element.h
 index 673c4e445446..64a4ec3b5678 100644
+/Users/susie/nwjs/src/third_party/blink/renderer/bindings/core/v8/v8_string_resource.h
+ok
 --- a/third_party/WebKit/Source/core/dom/Element.h
 +++ b/third_party/WebKit/Source/core/dom/Element.h
 @@ -442,6 +442,12 @@ public:
@@ -311,8 +333,10 @@ index 673c4e445446..64a4ec3b5678 100644
      Element* insertAdjacentElement(const String& where, Element* newChild, ExceptionState&);
      void insertAdjacentText(const String& where, const String& text, ExceptionState&);
      void insertAdjacentHTML(const String& where, const String& html, ExceptionState&);
+
 diff --git a/third_party/WebKit/Source/core/dom/Element.idl b/third_party/WebKit/Source/core/dom/Element.idl
 index c8a7b622df09..0caf5ed347f1 100644
+ok, no changes
 --- a/third_party/WebKit/Source/core/dom/Element.idl
 +++ b/third_party/WebKit/Source/core/dom/Element.idl
 @@ -69,8 +69,8 @@ interface Element : Node {
@@ -328,6 +352,8 @@ index c8a7b622df09..0caf5ed347f1 100644
      // Shadow DOM
 diff --git a/third_party/WebKit/Source/core/frame/Location.cpp b/third_party/WebKit/Source/core/frame/Location.cpp
 index b83f6ffdb0c2..957362a950ce 100644
+/Users/susie/nwjs/src/third_party/blink/renderer/core/frame/location.cc
+ok
 --- a/third_party/WebKit/Source/core/frame/Location.cpp
 +++ b/third_party/WebKit/Source/core/frame/Location.cpp
 @@ -65,7 +65,10 @@ String Location::href() const
@@ -413,8 +439,11 @@ index b83f6ffdb0c2..957362a950ce 100644
  }
  
  void Location::setHref(LocalDOMWindow* currentWindow, LocalDOMWindow* enteredWindow, const String& url)
+
 diff --git a/third_party/WebKit/Source/wtf/text/StringImpl.cpp b/third_party/WebKit/Source/wtf/text/StringImpl.cpp
 index afae4ebd082b..6b12bc53efa2 100644
+/Users/susie/nwjs/src/third_party/blink/renderer/platform/wtf/text/string_impl.cc
+ok
 --- a/third_party/WebKit/Source/wtf/text/StringImpl.cpp
 +++ b/third_party/WebKit/Source/wtf/text/StringImpl.cpp
 @@ -299,7 +299,9 @@ PassRefPtr<StringImpl> StringImpl::createUninitialized(unsigned length, LChar*&
@@ -460,8 +489,11 @@ index afae4ebd082b..6b12bc53efa2 100644
  #if ENABLE(ASSERT)
      impl->assertHashIsCorrect();
  #endif
+
 diff --git a/third_party/WebKit/Source/wtf/text/StringImpl.h b/third_party/WebKit/Source/wtf/text/StringImpl.h
 index 89bef3aca802..c1aa84e530f0 100644
+/Users/susie/nwjs/src/third_party/blink/renderer/platform/wtf/text/string_impl.h
+ok, modified
 --- a/third_party/WebKit/Source/wtf/text/StringImpl.h
 +++ b/third_party/WebKit/Source/wtf/text/StringImpl.h
 @@ -30,6 +30,9 @@
@@ -485,9 +517,11 @@ index 89bef3aca802..c1aa84e530f0 100644
      }
  
      template <class UCharPredicate> PassRefPtr<StringImpl> stripMatchedCharacters(UCharPredicate);
+
 diff --git a/third_party/WebKit/Source/wtf/text/TaintTracking.cpp b/third_party/WebKit/Source/wtf/text/TaintTracking.cpp
 new file mode 100644
 index 000000000000..c982d589e410
+ok
 --- /dev/null
 +++ b/third_party/WebKit/Source/wtf/text/TaintTracking.cpp
 @@ -0,0 +1,38 @@
@@ -529,9 +563,11 @@ index 000000000000..c982d589e410
 +
 +} // namespace tainttracking
 +} // namespace webkit
+
 diff --git a/third_party/WebKit/Source/wtf/text/TaintTracking.h b/third_party/WebKit/Source/wtf/text/TaintTracking.h
 new file mode 100644
 index 000000000000..04699ef8908e
+ok
 --- /dev/null
 +++ b/third_party/WebKit/Source/wtf/text/TaintTracking.h
 @@ -0,0 +1,59 @@
@@ -594,8 +630,10 @@ index 000000000000..04699ef8908e
 +} // namespace webkit
 +
 +#endif
+
 diff --git a/third_party/WebKit/Source/wtf/wtf.gypi b/third_party/WebKit/Source/wtf/wtf.gypi
 index c18f1a2ddfd2..bb0cdf45d9a9 100644
+done
 --- a/third_party/WebKit/Source/wtf/wtf.gypi
 +++ b/third_party/WebKit/Source/wtf/wtf.gypi
 @@ -162,6 +162,8 @@
@@ -628,6 +666,7 @@ Subject: [PATCH 02/13] New version of taint checking which does not require
 
 diff --git a/third_party/WebKit/Source/core/dom/Document.cpp b/third_party/WebKit/Source/core/dom/Document.cpp
 index 8c1c043632fe..670b631006fb 100644
+ok
 --- a/third_party/WebKit/Source/core/dom/Document.cpp
 +++ b/third_party/WebKit/Source/core/dom/Document.cpp
 @@ -2847,11 +2847,13 @@ void Document::write(const SegmentedString& text, Document* enteredDocument, Exc
@@ -667,9 +706,11 @@ index 8c1c043632fe..670b631006fb 100644
 +    }
      writeln(builder.toString(), callingWindow->document(), exceptionState);
  }
- 
+
+
 diff --git a/third_party/WebKit/Source/core/dom/Element.cpp b/third_party/WebKit/Source/core/dom/Element.cpp
 index f647d5699e61..94ca2b073f5c 100644
+ok, done
 --- a/third_party/WebKit/Source/core/dom/Element.cpp
 +++ b/third_party/WebKit/Source/core/dom/Element.cpp
 @@ -2570,34 +2570,20 @@ void Element::dispatchFocusOutEvent(const AtomicString& eventType, Element* newF
@@ -740,8 +781,10 @@ index f647d5699e61..94ca2b073f5c 100644
      Element* contextElement = contextElementForInsertion(where, this, exceptionState);
      if (!contextElement)
          return;
+
 diff --git a/third_party/WebKit/Source/core/dom/Element.h b/third_party/WebKit/Source/core/dom/Element.h
 index 64a4ec3b5678..673c4e445446 100644
+ok
 --- a/third_party/WebKit/Source/core/dom/Element.h
 +++ b/third_party/WebKit/Source/core/dom/Element.h
 @@ -442,12 +442,6 @@ public:
@@ -757,8 +800,10 @@ index 64a4ec3b5678..673c4e445446 100644
      Element* insertAdjacentElement(const String& where, Element* newChild, ExceptionState&);
      void insertAdjacentText(const String& where, const String& text, ExceptionState&);
      void insertAdjacentHTML(const String& where, const String& html, ExceptionState&);
+
 diff --git a/third_party/WebKit/Source/core/dom/Element.idl b/third_party/WebKit/Source/core/dom/Element.idl
 index 0caf5ed347f1..c8a7b622df09 100644
+ok, no changes
 --- a/third_party/WebKit/Source/core/dom/Element.idl
 +++ b/third_party/WebKit/Source/core/dom/Element.idl
 @@ -69,8 +69,8 @@ interface Element : Node {
@@ -772,8 +817,10 @@ index 0caf5ed347f1..c8a7b622df09 100644
      [CEReactions, CustomElementCallbacks, RaisesException] void insertAdjacentHTML(DOMString position, DOMString text);
  
      // Shadow DOM
+
 diff --git a/third_party/WebKit/Source/core/dom/Node.cpp b/third_party/WebKit/Source/core/dom/Node.cpp
 index 49dbf9b8451b..7e9963183900 100644
+ok
 --- a/third_party/WebKit/Source/core/dom/Node.cpp
 +++ b/third_party/WebKit/Source/core/dom/Node.cpp
 @@ -2374,6 +2374,17 @@ v8::Local<v8::Object> Node::associateWithWrapper(v8::Isolate* isolate, const Wra
@@ -794,8 +841,10 @@ index 49dbf9b8451b..7e9963183900 100644
  } // namespace blink
  
  #ifndef NDEBUG
+
 diff --git a/third_party/WebKit/Source/core/dom/Node.h b/third_party/WebKit/Source/core/dom/Node.h
 index 2d03e74c8fea..9fbac4e4b86c 100644
+ok
 --- a/third_party/WebKit/Source/core/dom/Node.h
 +++ b/third_party/WebKit/Source/core/dom/Node.h
 @@ -434,6 +434,8 @@ public:
@@ -827,6 +876,7 @@ Subject: [PATCH 03/13] Adding taint setting/checking for post message,
 
 diff --git a/third_party/WebKit/Source/bindings/core/v8/V8StringResource.cpp b/third_party/WebKit/Source/bindings/core/v8/V8StringResource.cpp
 index c201ad12454b..03eea7cbd816 100644
+ok, done
 --- a/third_party/WebKit/Source/bindings/core/v8/V8StringResource.cpp
 +++ b/third_party/WebKit/Source/bindings/core/v8/V8StringResource.cpp
 @@ -69,6 +69,10 @@ struct StringTraits<AtomicString> {
@@ -840,8 +890,17 @@ index c201ad12454b..03eea7cbd816 100644
      v8String->WriteTaint(tainttracking::webkit::StringTaint::FromString(buffer), 0, length);
  }
  
+
 diff --git a/third_party/WebKit/Source/bindings/core/v8/custom/V8MessageEventCustom.cpp b/third_party/WebKit/Source/bindings/core/v8/custom/V8MessageEventCustom.cpp
 index 5254d1a0d832..bcf2f43aae58 100644
+fail
+might be /home/suzy/nwjs/src/third_party/blink/renderer/core/events/message_event.cc
+no
+might be 
+/home/suzy/nwjs/src/out/nw/gen/third_party/blink/renderer/bindings/core/v8/v8_message_event.cc
+might be under 
+/home/suzy/nwjs/src/third_party/blink/renderer/bindings/core/v8/custom/
+and then deleted
 --- a/third_party/WebKit/Source/bindings/core/v8/custom/V8MessageEventCustom.cpp
 +++ b/third_party/WebKit/Source/bindings/core/v8/custom/V8MessageEventCustom.cpp
 @@ -86,6 +86,7 @@ void V8MessageEvent::dataAttributeGetterCustom(const v8::FunctionCallbackInfo<v8
@@ -852,8 +911,10 @@ index 5254d1a0d832..bcf2f43aae58 100644
      v8SetReturnValue(info, result);
  }
  
+
 diff --git a/third_party/WebKit/Source/core/dom/Document.cpp b/third_party/WebKit/Source/core/dom/Document.cpp
 index 670b631006fb..1500ed2056dd 100644
+done
 --- a/third_party/WebKit/Source/core/dom/Document.cpp
 +++ b/third_party/WebKit/Source/core/dom/Document.cpp
 @@ -4111,8 +4111,14 @@ void Document::setCookie(const String& value, ExceptionState& exceptionState)
@@ -872,9 +933,11 @@ index 670b631006fb..1500ed2056dd 100644
 +    }
      return nullAtom;
  }
- 
+
+
 diff --git a/third_party/WebKit/Source/core/dom/Node.cpp b/third_party/WebKit/Source/core/dom/Node.cpp
 index 7e9963183900..65c4c6a8d89a 100644
+done
 --- a/third_party/WebKit/Source/core/dom/Node.cpp
 +++ b/third_party/WebKit/Source/core/dom/Node.cpp
 @@ -2374,6 +2374,7 @@ v8::Local<v8::Object> Node::associateWithWrapper(v8::Isolate* isolate, const Wra
@@ -885,8 +948,10 @@ index 7e9963183900..65c4c6a8d89a 100644
  void Node::LogIfTaintedNode(const String& value, v8::String::TaintSinkLabel label)
  {
      LocalFrame* frame = document().frame();
+
 diff --git a/third_party/WebKit/Source/core/html/HTMLScriptElement.cpp b/third_party/WebKit/Source/core/html/HTMLScriptElement.cpp
 index 94e7479c784a..3513ddb5d53a 100644
+ok
 --- a/third_party/WebKit/Source/core/html/HTMLScriptElement.cpp
 +++ b/third_party/WebKit/Source/core/html/HTMLScriptElement.cpp
 @@ -79,6 +79,7 @@ void HTMLScriptElement::didMoveToNewDocument(Document& oldDocument)
@@ -928,6 +993,11 @@ Subject: [PATCH 04/13] Adding taint checking for urls in <a>, <embed>,
 
 diff --git a/third_party/WebKit/Source/bindings/core/v8/WindowProxy.cpp b/third_party/WebKit/Source/bindings/core/v8/WindowProxy.cpp
 index a8d4be011e9c..e429e5af70f2 100644
+/home/suzy/nwjs/src/third_party/blink/renderer/bindings/core/v8/window_proxy.cc
+/home/suzy/nwjs/src/third_party/blink/renderer/bindings/core/v8/local_window_proxy.cc
+fail, in two files, not sure
+patched in /home/suzy/nwjs/src/third_party/blink/renderer/bindings/core/v8/local_window_proxy.cc
+ok
 --- a/third_party/WebKit/Source/bindings/core/v8/WindowProxy.cpp
 +++ b/third_party/WebKit/Source/bindings/core/v8/WindowProxy.cpp
 @@ -280,6 +280,10 @@ bool WindowProxy::initialize()
@@ -940,9 +1010,11 @@ index a8d4be011e9c..e429e5af70f2 100644
 +
      return true;
  }
- 
+
+
 diff --git a/third_party/WebKit/Source/core/dom/Document.cpp b/third_party/WebKit/Source/core/dom/Document.cpp
 index 1500ed2056dd..43487283951f 100644
+ok, done
 --- a/third_party/WebKit/Source/core/dom/Document.cpp
 +++ b/third_party/WebKit/Source/core/dom/Document.cpp
 @@ -4075,7 +4075,10 @@ String Document::cookie(ExceptionState& exceptionState) const
@@ -964,9 +1036,11 @@ index 1500ed2056dd..43487283951f 100644
 +    LogIfTaintedNode(value, v8::String::COOKIE_SINK);
      setCookies(this, cookieURL, value);
  }
- 
+
+
 diff --git a/third_party/WebKit/Source/core/dom/Element.cpp b/third_party/WebKit/Source/core/dom/Element.cpp
 index 94ca2b073f5c..786ff73c7623 100644
+ok
 --- a/third_party/WebKit/Source/core/dom/Element.cpp
 +++ b/third_party/WebKit/Source/core/dom/Element.cpp
 @@ -1099,6 +1099,14 @@ void Element::setAttribute(const AtomicString& localName, const AtomicString& va
@@ -984,8 +1058,10 @@ index 94ca2b073f5c..786ff73c7623 100644
      if (!elementData()) {
          setAttributeInternal(kNotFound, QualifiedName(nullAtom, caseAdjustedLocalName, nullAtom), value, NotInSynchronizationOfLazyAttribute);
          return;
+
 diff --git a/third_party/WebKit/Source/core/dom/Node.cpp b/third_party/WebKit/Source/core/dom/Node.cpp
 index 65c4c6a8d89a..3b26277480c8 100644
+ok
 --- a/third_party/WebKit/Source/core/dom/Node.cpp
 +++ b/third_party/WebKit/Source/core/dom/Node.cpp
 @@ -2377,11 +2377,13 @@ v8::Local<v8::Object> Node::associateWithWrapper(v8::Isolate* isolate, const Wra
@@ -1007,8 +1083,10 @@ index 65c4c6a8d89a..3b26277480c8 100644
          }
      }
  }
+
 diff --git a/third_party/WebKit/Source/core/html/HTMLAnchorElement.cpp b/third_party/WebKit/Source/core/html/HTMLAnchorElement.cpp
 index f3d3de831bf0..37116b198b62 100644
+ok
 --- a/third_party/WebKit/Source/core/html/HTMLAnchorElement.cpp
 +++ b/third_party/WebKit/Source/core/html/HTMLAnchorElement.cpp
 @@ -262,6 +262,8 @@ void HTMLAnchorElement::setActive(bool down)
@@ -1020,8 +1098,11 @@ index f3d3de831bf0..37116b198b62 100644
          bool wasLink = isLink();
          setIsLink(!value.isNull());
          if (wasLink || isLink()) {
+
 diff --git a/third_party/WebKit/Source/core/html/HTMLEmbedElement.cpp b/third_party/WebKit/Source/core/html/HTMLEmbedElement.cpp
 index dfb698dacd38..e143f3aab6c5 100644
+/home/suzy/nwjs/src/third_party/blink/renderer/core/html/html_embed_element.cc
+ok
 --- a/third_party/WebKit/Source/core/html/HTMLEmbedElement.cpp
 +++ b/third_party/WebKit/Source/core/html/HTMLEmbedElement.cpp
 @@ -101,6 +101,7 @@ void HTMLEmbedElement::parseAttribute(const QualifiedName& name, const AtomicStr
@@ -1032,8 +1113,10 @@ index dfb698dacd38..e143f3aab6c5 100644
          m_url = stripLeadingAndTrailingHTMLSpaces(value);
          if (layoutObject() && isImageType()) {
              if (!m_imageLoader)
+
 diff --git a/third_party/WebKit/Source/core/html/HTMLIFrameElement.cpp b/third_party/WebKit/Source/core/html/HTMLIFrameElement.cpp
 index 86f95d451593..276041be5f8b 100644
+ok, not sure
 --- a/third_party/WebKit/Source/core/html/HTMLIFrameElement.cpp
 +++ b/third_party/WebKit/Source/core/html/HTMLIFrameElement.cpp
 @@ -120,8 +120,10 @@ void HTMLIFrameElement::parseAttribute(const QualifiedName& name, const AtomicSt
@@ -1048,8 +1131,10 @@ index 86f95d451593..276041be5f8b 100644
          HTMLFrameElementBase::parseAttribute(name, oldValue, value);
      }
  }
+
 diff --git a/third_party/WebKit/Source/core/html/HTMLImageElement.cpp b/third_party/WebKit/Source/core/html/HTMLImageElement.cpp
 index 25baa498a4e7..bec387ab1e94 100644
+ok
 --- a/third_party/WebKit/Source/core/html/HTMLImageElement.cpp
 +++ b/third_party/WebKit/Source/core/html/HTMLImageElement.cpp
 @@ -260,6 +260,7 @@ void HTMLImageElement::parseAttribute(const QualifiedName& name, const AtomicStr
@@ -1087,6 +1172,7 @@ Subject: [PATCH 05/13] Committing old changes to webkit adding taints
 
 diff --git a/third_party/WebKit/Source/bindings/core/v8/ScriptState.cpp b/third_party/WebKit/Source/bindings/core/v8/ScriptState.cpp
 index b1e9578ba156..ae2f2d39447b 100644
+ok, done
 --- a/third_party/WebKit/Source/bindings/core/v8/ScriptState.cpp
 +++ b/third_party/WebKit/Source/bindings/core/v8/ScriptState.cpp
 @@ -11,6 +11,7 @@
@@ -1134,8 +1220,10 @@ index b1e9578ba156..ae2f2d39447b 100644
  ExecutionContext* ScriptState::getExecutionContext() const
  {
      v8::HandleScope scope(m_isolate);
+
 diff --git a/third_party/WebKit/Source/bindings/core/v8/ScriptState.h b/third_party/WebKit/Source/bindings/core/v8/ScriptState.h
 index 8a0791aac399..d9aa36c1d3ec 100644
+ok, done
 --- a/third_party/WebKit/Source/bindings/core/v8/ScriptState.h
 +++ b/third_party/WebKit/Source/bindings/core/v8/ScriptState.h
 @@ -121,7 +121,9 @@ public:
@@ -1148,9 +1236,11 @@ index 8a0791aac399..d9aa36c1d3ec 100644
 +    int64_t LogIfTainted(const String& str, int arg_idx, v8::String::TaintSinkLabel label);
  
      ScriptValue getFromExtrasExports(const char* name);
- 
+
+
 diff --git a/third_party/WebKit/Source/core/dom/Document.cpp b/third_party/WebKit/Source/core/dom/Document.cpp
 index 43487283951f..4d1b081d7eb3 100644
+ok, done
 --- a/third_party/WebKit/Source/core/dom/Document.cpp
 +++ b/third_party/WebKit/Source/core/dom/Document.cpp
 @@ -2847,13 +2847,13 @@ void Document::write(const SegmentedString& text, Document* enteredDocument, Exc
@@ -1195,9 +1285,11 @@ index 43487283951f..4d1b081d7eb3 100644
 +    LogIfTaintedNode(value, 0, v8::String::COOKIE_SINK);
      setCookies(this, cookieURL, value);
  }
- 
+
+
 diff --git a/third_party/WebKit/Source/core/dom/Element.cpp b/third_party/WebKit/Source/core/dom/Element.cpp
 index 786ff73c7623..1de97a759ef6 100644
+ok, done
 --- a/third_party/WebKit/Source/core/dom/Element.cpp
 +++ b/third_party/WebKit/Source/core/dom/Element.cpp
 @@ -1101,10 +1101,10 @@ void Element::setAttribute(const AtomicString& localName, const AtomicString& va
@@ -1240,8 +1332,10 @@ index 786ff73c7623..1de97a759ef6 100644
  
      Element* contextElement = contextElementForInsertion(where, this, exceptionState);
      if (!contextElement)
+
 diff --git a/third_party/WebKit/Source/core/dom/Node.cpp b/third_party/WebKit/Source/core/dom/Node.cpp
 index 3b26277480c8..8c2a91225f4e 100644
+ok, done
 --- a/third_party/WebKit/Source/core/dom/Node.cpp
 +++ b/third_party/WebKit/Source/core/dom/Node.cpp
 @@ -2375,14 +2375,16 @@ v8::Local<v8::Object> Node::associateWithWrapper(v8::Isolate* isolate, const Wra
@@ -1263,8 +1357,10 @@ index 3b26277480c8..8c2a91225f4e 100644
              }
          }
      }
+
 diff --git a/third_party/WebKit/Source/core/dom/Node.h b/third_party/WebKit/Source/core/dom/Node.h
 index 9fbac4e4b86c..131418c74393 100644
+ok, done
 --- a/third_party/WebKit/Source/core/dom/Node.h
 +++ b/third_party/WebKit/Source/core/dom/Node.h
 @@ -434,7 +434,7 @@ public:
@@ -1276,8 +1372,10 @@ index 9fbac4e4b86c..131418c74393 100644
  
      TreeScope& treeScope() const
      {
+
 diff --git a/third_party/WebKit/Source/core/frame/Location.cpp b/third_party/WebKit/Source/core/frame/Location.cpp
 index 957362a950ce..41482cfe28fa 100644
+ok, done
 --- a/third_party/WebKit/Source/core/frame/Location.cpp
 +++ b/third_party/WebKit/Source/core/frame/Location.cpp
 @@ -75,7 +75,11 @@ String Location::protocol() const
@@ -1362,8 +1460,10 @@ index 957362a950ce..41482cfe28fa 100644
  }
  
  void Location::setHref(LocalDOMWindow* currentWindow, LocalDOMWindow* enteredWindow, const String& url)
+
 diff --git a/third_party/WebKit/Source/core/html/HTMLAnchorElement.cpp b/third_party/WebKit/Source/core/html/HTMLAnchorElement.cpp
 index 37116b198b62..4856f64d951a 100644
+ok, done
 --- a/third_party/WebKit/Source/core/html/HTMLAnchorElement.cpp
 +++ b/third_party/WebKit/Source/core/html/HTMLAnchorElement.cpp
 @@ -262,7 +262,7 @@ void HTMLAnchorElement::setActive(bool down)
@@ -1375,8 +1475,10 @@ index 37116b198b62..4856f64d951a 100644
  
          bool wasLink = isLink();
          setIsLink(!value.isNull());
+
 diff --git a/third_party/WebKit/Source/core/html/HTMLEmbedElement.cpp b/third_party/WebKit/Source/core/html/HTMLEmbedElement.cpp
 index e143f3aab6c5..b1f76d64b6c5 100644
+ok, done
 --- a/third_party/WebKit/Source/core/html/HTMLEmbedElement.cpp
 +++ b/third_party/WebKit/Source/core/html/HTMLEmbedElement.cpp
 @@ -101,7 +101,7 @@ void HTMLEmbedElement::parseAttribute(const QualifiedName& name, const AtomicStr
@@ -1388,8 +1490,10 @@ index e143f3aab6c5..b1f76d64b6c5 100644
          m_url = stripLeadingAndTrailingHTMLSpaces(value);
          if (layoutObject() && isImageType()) {
              if (!m_imageLoader)
+
 diff --git a/third_party/WebKit/Source/core/html/HTMLIFrameElement.cpp b/third_party/WebKit/Source/core/html/HTMLIFrameElement.cpp
 index 276041be5f8b..ad0521d9152a 100644
+ok, done
 --- a/third_party/WebKit/Source/core/html/HTMLIFrameElement.cpp
 +++ b/third_party/WebKit/Source/core/html/HTMLIFrameElement.cpp
 @@ -121,7 +121,7 @@ void HTMLIFrameElement::parseAttribute(const QualifiedName& name, const AtomicSt
@@ -1401,8 +1505,10 @@ index 276041be5f8b..ad0521d9152a 100644
              logUpdateAttributeIfIsolatedWorldAndInDocument("iframe", srcAttr, oldValue, value);
          }
          HTMLFrameElementBase::parseAttribute(name, oldValue, value);
+
 diff --git a/third_party/WebKit/Source/core/html/HTMLImageElement.cpp b/third_party/WebKit/Source/core/html/HTMLImageElement.cpp
 index bec387ab1e94..53c8d25d9588 100644
+ok, done
 --- a/third_party/WebKit/Source/core/html/HTMLImageElement.cpp
 +++ b/third_party/WebKit/Source/core/html/HTMLImageElement.cpp
 @@ -260,7 +260,7 @@ void HTMLImageElement::parseAttribute(const QualifiedName& name, const AtomicStr
@@ -1414,8 +1520,10 @@ index bec387ab1e94..53c8d25d9588 100644
          selectSourceURL(ImageLoader::UpdateIgnorePreviousError);
      } else if (name == usemapAttr) {
          setIsLink(!value.isNull());
+
 diff --git a/third_party/WebKit/Source/core/html/HTMLScriptElement.cpp b/third_party/WebKit/Source/core/html/HTMLScriptElement.cpp
 index 3513ddb5d53a..3554daa42129 100644
+ok, done
 --- a/third_party/WebKit/Source/core/html/HTMLScriptElement.cpp
 +++ b/third_party/WebKit/Source/core/html/HTMLScriptElement.cpp
 @@ -79,7 +79,7 @@ void HTMLScriptElement::didMoveToNewDocument(Document& oldDocument)
@@ -1438,6 +1546,7 @@ index 3513ddb5d53a..3554daa42129 100644
  
 diff --git a/third_party/WebKit/Source/wtf/text/TaintTracking.h b/third_party/WebKit/Source/wtf/text/TaintTracking.h
 index 04699ef8908e..d654f77fbfdb 100644
+ok, done
 --- a/third_party/WebKit/Source/wtf/text/TaintTracking.h
 +++ b/third_party/WebKit/Source/wtf/text/TaintTracking.h
 @@ -20,6 +20,14 @@ enum TaintType {
@@ -1522,6 +1631,7 @@ diff --git a/third_party/WebKit/Source/bindings/core/v8/ScriptState.cpp b/third_
 index ae2f2d39447b..1dc8a084ecaf 100644
 --- a/third_party/WebKit/Source/bindings/core/v8/ScriptState.cpp
 +++ b/third_party/WebKit/Source/bindings/core/v8/ScriptState.cpp
+ok, done
 @@ -77,6 +77,16 @@ ScriptValue ScriptState::getFromExtrasExports(const char* name)
      return ScriptValue(this, v8Value);
  }
@@ -1541,6 +1651,7 @@ index ae2f2d39447b..1dc8a084ecaf 100644
                                    // the function callback info
 diff --git a/third_party/WebKit/Source/bindings/core/v8/ScriptState.h b/third_party/WebKit/Source/bindings/core/v8/ScriptState.h
 index d9aa36c1d3ec..aaabe4083562 100644
+ok, done
 --- a/third_party/WebKit/Source/bindings/core/v8/ScriptState.h
 +++ b/third_party/WebKit/Source/bindings/core/v8/ScriptState.h
 @@ -124,6 +124,8 @@ public:
@@ -1554,6 +1665,7 @@ index d9aa36c1d3ec..aaabe4083562 100644
  
 diff --git a/third_party/WebKit/Source/bindings/core/v8/V8StringResource.cpp b/third_party/WebKit/Source/bindings/core/v8/V8StringResource.cpp
 index 03eea7cbd816..ac091929101c 100644
+ok, done
 --- a/third_party/WebKit/Source/bindings/core/v8/V8StringResource.cpp
 +++ b/third_party/WebKit/Source/bindings/core/v8/V8StringResource.cpp
 @@ -31,10 +31,11 @@ static_assert(sizeof(tainttracking::webkit::TaintData) ==
@@ -1571,6 +1683,7 @@ index 03eea7cbd816..ac091929101c 100644
  #undef TAINT_ASSERT_EQUAL
 diff --git a/third_party/WebKit/Source/core/dom/Element.cpp b/third_party/WebKit/Source/core/dom/Element.cpp
 index 1de97a759ef6..5dfeaf884ee6 100644
+ok, done
 --- a/third_party/WebKit/Source/core/dom/Element.cpp
 +++ b/third_party/WebKit/Source/core/dom/Element.cpp
 @@ -1101,7 +1101,7 @@ void Element::setAttribute(const AtomicString& localName, const AtomicString& va
@@ -1592,6 +1705,8 @@ index 1de97a759ef6..5dfeaf884ee6 100644
              elementData()->m_presentationAttributeStyleIsDirty = true;
 diff --git a/third_party/WebKit/Source/core/frame/DOMWindowTimers.cpp b/third_party/WebKit/Source/core/frame/DOMWindowTimers.cpp
 index 7efe08c2567c..e12af3e28781 100644
+/home/suzy/nwjs/src/third_party/blink/renderer/core/frame/window_or_worker_global_scope.cc
+ok
 --- a/third_party/WebKit/Source/core/frame/DOMWindowTimers.cpp
 +++ b/third_party/WebKit/Source/core/frame/DOMWindowTimers.cpp
 @@ -75,6 +75,16 @@ int setTimeout(ScriptState* scriptState, EventTarget& eventTarget, const ScriptV
@@ -1650,6 +1765,7 @@ index 7efe08c2567c..e12af3e28781 100644
  }
 diff --git a/third_party/WebKit/Source/core/html/HTMLAnchorElement.cpp b/third_party/WebKit/Source/core/html/HTMLAnchorElement.cpp
 index 4856f64d951a..af056e87e8a1 100644
+ok, done
 --- a/third_party/WebKit/Source/core/html/HTMLAnchorElement.cpp
 +++ b/third_party/WebKit/Source/core/html/HTMLAnchorElement.cpp
 @@ -262,7 +262,7 @@ void HTMLAnchorElement::setActive(bool down)
@@ -1663,6 +1779,7 @@ index 4856f64d951a..af056e87e8a1 100644
          setIsLink(!value.isNull());
 diff --git a/third_party/WebKit/Source/core/html/HTMLEmbedElement.cpp b/third_party/WebKit/Source/core/html/HTMLEmbedElement.cpp
 index b1f76d64b6c5..ccb45c5f43d8 100644
+ok, done
 --- a/third_party/WebKit/Source/core/html/HTMLEmbedElement.cpp
 +++ b/third_party/WebKit/Source/core/html/HTMLEmbedElement.cpp
 @@ -101,7 +101,7 @@ void HTMLEmbedElement::parseAttribute(const QualifiedName& name, const AtomicStr
@@ -1676,6 +1793,7 @@ index b1f76d64b6c5..ccb45c5f43d8 100644
              if (!m_imageLoader)
 diff --git a/third_party/WebKit/Source/core/html/HTMLIFrameElement.cpp b/third_party/WebKit/Source/core/html/HTMLIFrameElement.cpp
 index ad0521d9152a..82ea4d772734 100644
+ok, done
 --- a/third_party/WebKit/Source/core/html/HTMLIFrameElement.cpp
 +++ b/third_party/WebKit/Source/core/html/HTMLIFrameElement.cpp
 @@ -121,7 +121,7 @@ void HTMLIFrameElement::parseAttribute(const QualifiedName& name, const AtomicSt
@@ -1689,6 +1807,7 @@ index ad0521d9152a..82ea4d772734 100644
          HTMLFrameElementBase::parseAttribute(name, oldValue, value);
 diff --git a/third_party/WebKit/Source/core/html/HTMLImageElement.cpp b/third_party/WebKit/Source/core/html/HTMLImageElement.cpp
 index 53c8d25d9588..7a2a831fa4ce 100644
+ok, done
 --- a/third_party/WebKit/Source/core/html/HTMLImageElement.cpp
 +++ b/third_party/WebKit/Source/core/html/HTMLImageElement.cpp
 @@ -260,7 +260,7 @@ void HTMLImageElement::parseAttribute(const QualifiedName& name, const AtomicStr
@@ -1702,6 +1821,7 @@ index 53c8d25d9588..7a2a831fa4ce 100644
          setIsLink(!value.isNull());
 diff --git a/third_party/WebKit/Source/core/html/HTMLScriptElement.cpp b/third_party/WebKit/Source/core/html/HTMLScriptElement.cpp
 index 3554daa42129..07ddfdcbd99d 100644
+ok, done
 --- a/third_party/WebKit/Source/core/html/HTMLScriptElement.cpp
 +++ b/third_party/WebKit/Source/core/html/HTMLScriptElement.cpp
 @@ -79,7 +79,7 @@ void HTMLScriptElement::didMoveToNewDocument(Document& oldDocument)
@@ -1715,6 +1835,7 @@ index 3554daa42129..07ddfdcbd99d 100644
      } else if (name == asyncAttr) {
 diff --git a/third_party/WebKit/Source/wtf/text/TaintTracking.h b/third_party/WebKit/Source/wtf/text/TaintTracking.h
 index d654f77fbfdb..fa47e66bf249 100644
+ok, done
 --- a/third_party/WebKit/Source/wtf/text/TaintTracking.h
 +++ b/third_party/WebKit/Source/wtf/text/TaintTracking.h
 @@ -13,51 +13,66 @@ class StringImpl;
@@ -1827,6 +1948,8 @@ index d654f77fbfdb..fa47e66bf249 100644
  
 diff --git a/ui/events/x/events_x_utils.cc b/ui/events/x/events_x_utils.cc
 index 250851067f91..810b31c1981d 100644
+/home/suzy/nwjs/src/ui/events/x/events_x_utils.cc
+ok
 --- a/ui/events/x/events_x_utils.cc
 +++ b/ui/events/x/events_x_utils.cc
 @@ -272,7 +272,7 @@ ui::EventType GetTouchEventType(const XEvent& xev) {
@@ -1859,6 +1982,7 @@ Subject: [PATCH 07/13] Tracking cross-origin message checking
 
 diff --git a/third_party/WebKit/Source/bindings/core/v8/V8StringResource.cpp b/third_party/WebKit/Source/bindings/core/v8/V8StringResource.cpp
 index ac091929101c..e65f8d937be3 100644
+ok, done
 --- a/third_party/WebKit/Source/bindings/core/v8/V8StringResource.cpp
 +++ b/third_party/WebKit/Source/bindings/core/v8/V8StringResource.cpp
 @@ -75,6 +75,7 @@ void writeTaintHelper(v8::Local<v8::String> v8String, StringImpl* buffer, int le
@@ -1871,6 +1995,7 @@ index ac091929101c..e65f8d937be3 100644
  struct V8StringTwoBytesTrait {
 diff --git a/third_party/WebKit/Source/bindings/core/v8/V8StringResource.h b/third_party/WebKit/Source/bindings/core/v8/V8StringResource.h
 index 782aee338e25..ca60b90fee8b 100644
+ok
 --- a/third_party/WebKit/Source/bindings/core/v8/V8StringResource.h
 +++ b/third_party/WebKit/Source/bindings/core/v8/V8StringResource.h
 @@ -171,6 +171,7 @@ public:
@@ -1883,6 +2008,7 @@ index 782aee338e25..ca60b90fee8b 100644
      {
 diff --git a/third_party/WebKit/Source/bindings/core/v8/custom/V8MessageEventCustom.cpp b/third_party/WebKit/Source/bindings/core/v8/custom/V8MessageEventCustom.cpp
 index bcf2f43aae58..8ca91572ad08 100644
+not sure
 --- a/third_party/WebKit/Source/bindings/core/v8/custom/V8MessageEventCustom.cpp
 +++ b/third_party/WebKit/Source/bindings/core/v8/custom/V8MessageEventCustom.cpp
 @@ -87,6 +87,7 @@ void V8MessageEvent::dataAttributeGetterCustom(const v8::FunctionCallbackInfo<v8
@@ -1895,6 +2021,8 @@ index bcf2f43aae58..8ca91572ad08 100644
  
 diff --git a/third_party/WebKit/Source/core/events/MessageEvent.cpp b/third_party/WebKit/Source/core/events/MessageEvent.cpp
 index 0966e1708e7a..eead8b1804c2 100644
+/home/suzy/nwjs/src/third_party/blink/renderer/core/events/message_event.cc
+ok
 --- a/third_party/WebKit/Source/core/events/MessageEvent.cpp
 +++ b/third_party/WebKit/Source/core/events/MessageEvent.cpp
 @@ -154,6 +154,10 @@ void MessageEvent::initMessageEvent(const AtomicString& type, bool canBubble, bo
@@ -1939,6 +2067,8 @@ index 0966e1708e7a..eead8b1804c2 100644
  } // namespace blink
 diff --git a/third_party/WebKit/Source/core/events/MessageEvent.h b/third_party/WebKit/Source/core/events/MessageEvent.h
 index b338c111c39f..f5d05a691055 100644
+/home/suzy/nwjs/src/third_party/blink/renderer/core/events/message_event.h
+ok
 --- a/third_party/WebKit/Source/core/events/MessageEvent.h
 +++ b/third_party/WebKit/Source/core/events/MessageEvent.h
 @@ -114,6 +114,8 @@ public:
@@ -1960,6 +2090,7 @@ index b338c111c39f..f5d05a691055 100644
  } // namespace blink
 diff --git a/third_party/WebKit/Source/wtf/text/TaintTracking.cpp b/third_party/WebKit/Source/wtf/text/TaintTracking.cpp
 index c982d589e410..b2a3ccdc5a32 100644
+ok, done
 --- a/third_party/WebKit/Source/wtf/text/TaintTracking.cpp
 +++ b/third_party/WebKit/Source/wtf/text/TaintTracking.cpp
 @@ -8,7 +8,7 @@ namespace webkit {
@@ -2009,6 +2140,7 @@ index c982d589e410..b2a3ccdc5a32 100644
  } // namespace webkit
 diff --git a/third_party/WebKit/Source/wtf/text/TaintTracking.h b/third_party/WebKit/Source/wtf/text/TaintTracking.h
 index fa47e66bf249..8e7f9c1106f5 100644
+ok, done
 --- a/third_party/WebKit/Source/wtf/text/TaintTracking.h
 +++ b/third_party/WebKit/Source/wtf/text/TaintTracking.h
 @@ -82,6 +82,8 @@ class WTF_EXPORT StringTaint {
@@ -2038,6 +2170,7 @@ Subject: [PATCH 08/13] Fixing bugs in message origin detection
 
 diff --git a/third_party/WebKit/Source/bindings/core/v8/custom/V8MessageEventCustom.cpp b/third_party/WebKit/Source/bindings/core/v8/custom/V8MessageEventCustom.cpp
 index 8ca91572ad08..61b1bdbd265c 100644
+not sure
 --- a/third_party/WebKit/Source/bindings/core/v8/custom/V8MessageEventCustom.cpp
 +++ b/third_party/WebKit/Source/bindings/core/v8/custom/V8MessageEventCustom.cpp
 @@ -87,7 +87,35 @@ void V8MessageEvent::dataAttributeGetterCustom(const v8::FunctionCallbackInfo<v8
@@ -2079,6 +2212,7 @@ index 8ca91572ad08..61b1bdbd265c 100644
  
 diff --git a/third_party/WebKit/Source/core/events/MessageEvent.cpp b/third_party/WebKit/Source/core/events/MessageEvent.cpp
 index eead8b1804c2..804dc75d8cfe 100644
+ok, done
 --- a/third_party/WebKit/Source/core/events/MessageEvent.cpp
 +++ b/third_party/WebKit/Source/core/events/MessageEvent.cpp
 @@ -32,6 +32,7 @@
@@ -2145,6 +2279,7 @@ index eead8b1804c2..804dc75d8cfe 100644
  } // namespace blink
 diff --git a/third_party/WebKit/Source/core/events/MessageEvent.h b/third_party/WebKit/Source/core/events/MessageEvent.h
 index f5d05a691055..f6de3b0cf17e 100644
+ok, done
 --- a/third_party/WebKit/Source/core/events/MessageEvent.h
 +++ b/third_party/WebKit/Source/core/events/MessageEvent.h
 @@ -44,6 +44,8 @@ namespace blink {
@@ -2175,6 +2310,8 @@ index f5d05a691055..f6de3b0cf17e 100644
  } // namespace blink
 diff --git a/third_party/WebKit/Source/core/events/MessageEvent.idl b/third_party/WebKit/Source/core/events/MessageEvent.idl
 index b8a5265f1bf6..9fee731011dc 100644
+/home/suzy/nwjs/src/third_party/blink/renderer/core/events/message_event.idl
+ok
 --- a/third_party/WebKit/Source/core/events/MessageEvent.idl
 +++ b/third_party/WebKit/Source/core/events/MessageEvent.idl
 @@ -33,7 +33,7 @@
@@ -2203,6 +2340,7 @@ Subject: [PATCH 09/13] Modifying message tracking
 
 diff --git a/third_party/WebKit/Source/bindings/core/v8/WindowProxy.cpp b/third_party/WebKit/Source/bindings/core/v8/WindowProxy.cpp
 index e429e5af70f2..83caf83f09f8 100644
+ok, done
 --- a/third_party/WebKit/Source/bindings/core/v8/WindowProxy.cpp
 +++ b/third_party/WebKit/Source/bindings/core/v8/WindowProxy.cpp
 @@ -44,6 +44,7 @@
@@ -2240,6 +2378,7 @@ index e429e5af70f2..83caf83f09f8 100644
  static v8::Local<v8::Value> getNamedProperty(HTMLDocument* htmlDocument, const AtomicString& key, v8::Local<v8::Object> creationContext, v8::Isolate* isolate)
 diff --git a/third_party/WebKit/Source/bindings/core/v8/custom/V8MessageEventCustom.cpp b/third_party/WebKit/Source/bindings/core/v8/custom/V8MessageEventCustom.cpp
 index 61b1bdbd265c..038c1b497066 100644
+not sure
 --- a/third_party/WebKit/Source/bindings/core/v8/custom/V8MessageEventCustom.cpp
 +++ b/third_party/WebKit/Source/bindings/core/v8/custom/V8MessageEventCustom.cpp
 @@ -104,10 +104,12 @@ void V8MessageEvent::originAttributeGetterCustom(const v8::FunctionCallbackInfo<
@@ -2258,6 +2397,7 @@ index 61b1bdbd265c..038c1b497066 100644
          v8SetReturnValue(info, result);
 diff --git a/third_party/WebKit/Source/core/events/MessageEvent.h b/third_party/WebKit/Source/core/events/MessageEvent.h
 index f6de3b0cf17e..0d523425f038 100644
+ok, done
 --- a/third_party/WebKit/Source/core/events/MessageEvent.h
 +++ b/third_party/WebKit/Source/core/events/MessageEvent.h
 @@ -39,12 +39,15 @@
@@ -2301,6 +2441,7 @@ Subject: [PATCH 10/13] Fixing bug where about:blank urls do not get updated
 
 diff --git a/third_party/WebKit/Source/bindings/core/v8/ScriptController.cpp b/third_party/WebKit/Source/bindings/core/v8/ScriptController.cpp
 index fb9ae287cd5a..3d6264840492 100644
+ok
 --- a/third_party/WebKit/Source/bindings/core/v8/ScriptController.cpp
 +++ b/third_party/WebKit/Source/bindings/core/v8/ScriptController.cpp
 @@ -111,6 +111,10 @@ void ScriptController::updateSecurityOrigin(SecurityOrigin* origin)
@@ -2316,6 +2457,7 @@ index fb9ae287cd5a..3d6264840492 100644
      TRACE_EVENT1("devtools.timeline", "EvaluateScript", "data", InspectorEvaluateScriptEvent::data(frame(), source.url().getString(), source.startPosition()));
 diff --git a/third_party/WebKit/Source/bindings/core/v8/ScriptController.h b/third_party/WebKit/Source/bindings/core/v8/ScriptController.h
 index 2779e0fc10ad..05634d77db2d 100644
+ok
 --- a/third_party/WebKit/Source/bindings/core/v8/ScriptController.h
 +++ b/third_party/WebKit/Source/bindings/core/v8/ScriptController.h
 @@ -128,6 +128,7 @@ public:
@@ -2328,6 +2470,7 @@ index 2779e0fc10ad..05634d77db2d 100644
  
 diff --git a/third_party/WebKit/Source/bindings/core/v8/WindowProxy.cpp b/third_party/WebKit/Source/bindings/core/v8/WindowProxy.cpp
 index 83caf83f09f8..206c1630c424 100644
+ok, done
 --- a/third_party/WebKit/Source/bindings/core/v8/WindowProxy.cpp
 +++ b/third_party/WebKit/Source/bindings/core/v8/WindowProxy.cpp
 @@ -488,15 +488,7 @@ void WindowProxy::updateDocument()
@@ -2369,6 +2512,7 @@ index 83caf83f09f8..206c1630c424 100644
  } // namespace blink
 diff --git a/third_party/WebKit/Source/bindings/core/v8/WindowProxy.h b/third_party/WebKit/Source/bindings/core/v8/WindowProxy.h
 index 0765d0248a94..62ecbf7207d4 100644
+ok
 --- a/third_party/WebKit/Source/bindings/core/v8/WindowProxy.h
 +++ b/third_party/WebKit/Source/bindings/core/v8/WindowProxy.h
 @@ -70,6 +70,8 @@ public:
@@ -2382,6 +2526,7 @@ index 0765d0248a94..62ecbf7207d4 100644
  
 diff --git a/third_party/WebKit/Source/core/dom/Document.cpp b/third_party/WebKit/Source/core/dom/Document.cpp
 index 4d1b081d7eb3..3c1a422f4510 100644
+ok, done
 --- a/third_party/WebKit/Source/core/dom/Document.cpp
 +++ b/third_party/WebKit/Source/core/dom/Document.cpp
 @@ -2917,6 +2917,9 @@ void Document::setURL(const KURL& url)
@@ -2396,6 +2541,7 @@ index 4d1b081d7eb3..3c1a422f4510 100644
  KURL Document::validBaseElementURL() const
 diff --git a/third_party/WebKit/Source/core/frame/Location.cpp b/third_party/WebKit/Source/core/frame/Location.cpp
 index 41482cfe28fa..60c1a3ec0db0 100644
+ok, done
 --- a/third_party/WebKit/Source/core/frame/Location.cpp
 +++ b/third_party/WebKit/Source/core/frame/Location.cpp
 @@ -283,6 +283,18 @@ void Location::setLocation(const String& url, LocalDOMWindow* currentWindow, Loc
@@ -2419,6 +2565,8 @@ index 41482cfe28fa..60c1a3ec0db0 100644
          return;
 diff --git a/third_party/WebKit/Source/core/page/FrameTree.cpp b/third_party/WebKit/Source/core/page/FrameTree.cpp
 index 5742191df101..da7580e7a19e 100644
+/home/suzy/nwjs/src/third_party/blink/renderer/core/page/frame_tree.cc
+ok
 --- a/third_party/WebKit/Source/core/page/FrameTree.cpp
 +++ b/third_party/WebKit/Source/core/page/FrameTree.cpp
 @@ -72,6 +72,8 @@ void FrameTree::setName(const AtomicString& name)
@@ -2449,6 +2597,8 @@ index 5742191df101..da7580e7a19e 100644
      visitor->trace(m_thisFrame);
 diff --git a/third_party/WebKit/Source/modules/storage/StorageArea.cpp b/third_party/WebKit/Source/modules/storage/StorageArea.cpp
 index 7447f5bdaff1..878be5c26789 100644
+/home/suzy/nwjs/src/third_party/blink/renderer/modules/storage/storage_area.cc
+ok
 --- a/third_party/WebKit/Source/modules/storage/StorageArea.cpp
 +++ b/third_party/WebKit/Source/modules/storage/StorageArea.cpp
 @@ -93,7 +93,10 @@ String StorageArea::getItem(const String& key, ExceptionState& exceptionState, L
@@ -2465,6 +2615,7 @@ index 7447f5bdaff1..878be5c26789 100644
  void StorageArea::setItem(const String& key, const String& value, ExceptionState& exceptionState, LocalFrame* frame)
 diff --git a/third_party/WebKit/Source/wtf/text/TaintTracking.cpp b/third_party/WebKit/Source/wtf/text/TaintTracking.cpp
 index b2a3ccdc5a32..1fa3c95b474e 100644
+ok, done
 --- a/third_party/WebKit/Source/wtf/text/TaintTracking.cpp
 +++ b/third_party/WebKit/Source/wtf/text/TaintTracking.cpp
 @@ -8,11 +8,17 @@ namespace webkit {
@@ -2525,6 +2676,7 @@ Subject: [PATCH 11/13] Uncommited file
 
 diff --git a/third_party/WebKit/Source/core/frame/Location.cpp b/third_party/WebKit/Source/core/frame/Location.cpp
 index 60c1a3ec0db0..964c12cd2c32 100644
+ok, done
 --- a/third_party/WebKit/Source/core/frame/Location.cpp
 +++ b/third_party/WebKit/Source/core/frame/Location.cpp
 @@ -53,7 +53,16 @@ DEFINE_TRACE(Location)
@@ -2561,6 +2713,7 @@ Subject: [PATCH 12/13] Fixing bug where adding a text element node to a script
 
 diff --git a/third_party/WebKit/Source/core/html/HTMLScriptElement.cpp b/third_party/WebKit/Source/core/html/HTMLScriptElement.cpp
 index 07ddfdcbd99d..ecfdc3cb5848 100644
+ok, done
 --- a/third_party/WebKit/Source/core/html/HTMLScriptElement.cpp
 +++ b/third_party/WebKit/Source/core/html/HTMLScriptElement.cpp
 @@ -68,6 +68,8 @@ void HTMLScriptElement::childrenChanged(const ChildrenChange& change)
@@ -2590,6 +2743,8 @@ Subject: [PATCH 13/13] Adding sink type
 
 diff --git a/third_party/WebKit/Source/core/events/EventTarget.cpp b/third_party/WebKit/Source/core/events/EventTarget.cpp
 index 90bcd0ac657c..42561b426ce7 100644
+/home/suzy/nwjs/src/third_party/blink/renderer/core/dom/events/event_target.cc
+ok
 --- a/third_party/WebKit/Source/core/events/EventTarget.cpp
 +++ b/third_party/WebKit/Source/core/events/EventTarget.cpp
 @@ -698,4 +698,9 @@ void EventTarget::removeAllEventListeners()
@@ -2604,6 +2759,7 @@ index 90bcd0ac657c..42561b426ce7 100644
  } // namespace blink
 diff --git a/third_party/WebKit/Source/core/events/EventTarget.h b/third_party/WebKit/Source/core/events/EventTarget.h
 index 0a2f3d60b2c5..ad0095ac9229 100644
+ok
 --- a/third_party/WebKit/Source/core/events/EventTarget.h
 +++ b/third_party/WebKit/Source/core/events/EventTarget.h
 @@ -128,6 +128,9 @@ public:
@@ -2618,6 +2774,7 @@ index 0a2f3d60b2c5..ad0095ac9229 100644
      // the Event object before dispatching.
 diff --git a/third_party/WebKit/Source/core/events/EventTarget.idl b/third_party/WebKit/Source/core/events/EventTarget.idl
 index dcbe5fcb89c8..657f535efef1 100644
+ok
 --- a/third_party/WebKit/Source/core/events/EventTarget.idl
 +++ b/third_party/WebKit/Source/core/events/EventTarget.idl
 @@ -27,4 +27,6 @@
@@ -2629,6 +2786,7 @@ index dcbe5fcb89c8..657f535efef1 100644
  };
 diff --git a/third_party/WebKit/Source/wtf/text/TaintTracking.h b/third_party/WebKit/Source/wtf/text/TaintTracking.h
 index 8e7f9c1106f5..75a40b0d32d5 100644
+ok, done
 --- a/third_party/WebKit/Source/wtf/text/TaintTracking.h
 +++ b/third_party/WebKit/Source/wtf/text/TaintTracking.h
 @@ -38,7 +38,7 @@ enum TaintType {

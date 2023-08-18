@@ -157,28 +157,27 @@ the current version. Then, you may need to run the hooks after doing this:
 cd <root>;
 gclient --runhooks
 
-gclient checkout 8d0c21dddbe95f83dc7323d749a9bcff9a84e020
+git checkout 8d0c21dddbe95f83dc7323d749a9bcff9a84e020
 
 /*
 Suzy: 
 
-It should be git checkout here
-*/
+It should be git checkout here, then:
+gclient sync
 
-gclient sync --with_branch_heads
+ValueError: invalid assignment: overrides var 'recursedeps' (file '/home/suzy/chromium/src/DEPS', line 979)
 
-/*
-Suzy:
+comment recursedeps in DEPS and run again.
 
-I encounter problem with gclient sync
-
-Don't know how to procced
+gclient sync --with_branch_heads -D --force
 
 */
+
+
 
 git apply /path/to/chromium_patch
 cd v8
-patch -p1 /path/to/v8_patch
+patch -p1 < /path/to/v8_patch
 
 
 Note about gclient sync: In my version of gclient, I encountered the issue here:

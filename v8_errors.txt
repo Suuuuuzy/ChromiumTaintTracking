@@ -1,0 +1,79 @@
+error: src/json11.cc: No such file or directory
+error: src/json11.hpp: No such file or directory
+error: src/taint_log_record.cc: No such file or directory
+error: src/taint_log_record.h: No such file or directory
+error: src/taint_tracking.cc: No such file or directory
+error: src/taint_tracking/taint_tracking.cc: No such file or directory
+error: src/taint_tracking/picosha2.h: No such file or directory
+
+no such errors if use patch -p1 > patch_file
+
+LookupSingleCharacterStringFromCode
+MakeOrFindTwoCharacterString
+里面都有taint tracking吧
+只有直接返回result的地方是➕tainttracking的
+而且区分不同的new string方法 
+
+
+NewProperSubString+
+NewExternalStringFromOneByte+
+NewExternalStringFromTwoByte+
+NewConsString+
+MakeOrFindTwoCharacterString+
+LookupSingleCharacterStringFromCode+
+
+
+set_taint_node_label?
+
+
+
+看还用不用DisallowHeapAllocation
+不然就改成
+DisallowGarbageCollection no_gc
+都有
+
+what is RuntimeEnterSymbolicStackFrame/RuntimeExitSymbolicStackFrame
+
+
+class V8_EXPORT ObjectTemplate : public Template { 
+  ...
+}
+class V8_EXPORT FunctionTemplate : public Template {
+}
+
+class V8_EXPORT Template : public Data {
+  ...
+}
+class V8_EXPORT Data {
+ private:                                                                       
+  Data();                                                                       
+};
+
+Name is a superclass for Symbol and String which can be both be used as names for a property.
+
+class Object {}
+
+// Smi represents integer Numbers that can be stored in 31 bits.
+// Smis are immediate which means they are NOT allocated in the heap.
+// The this pointer has the following format: [31 bit signed int] 0
+// For long smis it has the following format:
+//     [32 bit signed int] [31 bits zero padding] 0
+// Smi stands for small integer.
+class Smi: public Object {}
+
+
+
+
+error:
+ld.lld: error: undefined symbol: tainttracking::webkit::StringTaint::InitTaintData(WTF::StringImpl*)
+reason: 
+file not spicified in BUILD.gn
+
+
+what is tainttracking::FlattenTaintData?
+
+uri
+EscapePrivate
+
+
+
