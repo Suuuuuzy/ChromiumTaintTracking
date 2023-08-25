@@ -4,17 +4,7 @@ diff --git a/src/arm/code-stubs-arm.cc b/src/arm/code-stubs-arm.cc
 diff --git a/src/arm64/code-stubs-arm64.cc b/src/arm64/code-stubs-arm64.cc
 diff --git a/src/code-stubs-hydrogen.cc b/src/code-stubs-hydrogen.cc
 diff --git a/src/code-stubs.cc b/src/code-stubs.cc
-diff --git a/src/crankshaft/OWNERS b/src/crankshaft/OWNERS
-diff --git a/src/crankshaft/hydrogen-instructions.h b/src/crankshaft/hydrogen-instructions.h
-diff --git a/src/crankshaft/hydrogen.cc b/src/crankshaft/hydrogen.cc
-diff --git a/src/crankshaft/hydrogen.h b/src/crankshaft/hydrogen.h
-diff --git a/src/crankshaft/lithium-codegen.cc b/src/crankshaft/lithium-codegen.cc
 diff --git a/src/flag-definitions.h b/src/flag-definitions.h
-diff --git a/src/full-codegen/full-codegen.cc b/src/full-codegen/full-codegen.cc
-diff --git a/src/full-codegen/full-codegen.h b/src/full-codegen/full-codegen.h
-diff --git a/src/full-codegen/x64/full-codegen-x64.cc b/src/full-codegen/x64/full-codegen-x64.cc
-diff --git a/src/heap/heap-inl.h b/src/heap/heap-inl.h
-diff --git a/src/heap/heap.cc b/src/heap/heap.cc
 diff --git a/src/mips/code-stubs-mips.cc b/src/mips/code-stubs-mips.cc
 diff --git a/src/mips64/code-stubs-mips64.cc b/src/mips64/code-stubs-mips64.cc
 diff --git a/src/ppc/code-stubs-ppc.cc b/src/ppc/code-stubs-ppc.cc
@@ -25,21 +15,52 @@ diff --git a/src/x87/code-stubs-x87.cc b/src/x87/code-stubs-x87.cc
 diff --git a/src/ast/ast-value-factory.h b/src/ast/ast-value-factory.h
 class AstRawString final : public AstString {
 diff --git a/src/builtins/x64/builtins-x64.cc b/src/builtins/x64/builtins-x64.cc
-
 diff --git a/src/builtins/builtins-string.cc b/src/builtins/builtins-string.cc
 add some prototype funcs for string type
 Generate_StringFromCharCode not found
 in builtins-string-gen.cc
 not finished!
 
+diff --git a/src/compiler/ast-graph-builder.cc b/src/compiler/ast-graph-builder.cc
+diff --git a/src/heap/heap-inl.h b/src/heap/heap-inl.h
+diff --git a/src/heap/heap.cc b/src/heap/heap.cc
+
+diff --git a/src/crankshaft/hydrogen.h b/src/crankshaft/hydrogen.h
+
 
 purpose analysis:
+old is in 2016
+new is in 2021
 
 
-diff --git a/src/compiler/ast-graph-builder.cc b/src/compiler/ast-graph-builder.cc
+diff --git a/src/full-codegen/full-codegen.cc b/src/full-codegen/full-codegen.cc
+diff --git a/src/full-codegen/full-codegen.h b/src/full-codegen/full-codegen.h
+diff --git a/src/full-codegen/x64/full-codegen-x64.cc b/src/full-codegen/x64/full-codegen-x64.cc
+
+
+diff --git a/src/crankshaft/hydrogen.cc b/src/crankshaft/hydrogen.cc
+in src/compiler/effect-control-linearizer.cc
+conflict
+
+
+diff --git a/src/crankshaft/lithium-codegen.cc b/src/crankshaft/lithium-codegen.cc
+seems solved
+
+diff --git a/src/crankshaft/hydrogen-instructions.h b/src/crankshaft/hydrogen-instructions.h
+in v8/src/compiler/access-builder.cc
+HObjectAccess->AccessBuilder
+HObjectAccess->FieldAccess
+not sure about the parameters
+
+diff --git a/src/crankshaft/OWNERS b/src/crankshaft/OWNERS
+ignore
+
+
 diff --git a/src/compiler/ast-graph-builder.h b/src/compiler/ast-graph-builder.h
+should be bytecodeGraphBuilder in new
+v8/src/compiler/bytecode-graph-builder.cc
+done
 
-should be bytecodeGraphBuilder
 
 diff --git a/src/debug/liveedit.cc b/src/debug/liveedit.cc
 add one para for SourcePositionTableBuilder::AddPosition
@@ -75,7 +96,7 @@ add one para to source_position_table_builder()->AddPosition
 done
 
 
-diff --git a/src/interpreter/bytec ode-generator.cc b/src/interpreter/bytecode-generator.cc
+diff --git a/src/interpreter/bytecode-generator.cc b/src/interpreter/bytecode-generator.cc
 update BytecodeGenerator
 add GenerateTaintTrackingHook(expr); for functions that visit different types
 no VisitDoExpression

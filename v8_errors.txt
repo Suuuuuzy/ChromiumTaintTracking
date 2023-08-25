@@ -35,6 +35,9 @@ DisallowGarbageCollection no_gc
 what is RuntimeEnterSymbolicStackFrame/RuntimeExitSymbolicStackFrame
 
 
+class Object : public TaggedImpl<HeapObjectReferenceType::STRONG, Address> {
+
+
 class V8_EXPORT ObjectTemplate : public Template { 
   ...
 }
@@ -61,6 +64,11 @@ class Object {}
 // Smi stands for small integer.
 class Smi: public Object {}
 
+class AstNode: public ZoneObject {
+
+// ZoneObject is an abstraction that helps define classes of objects
+// allocated in the Zone. Use it as a base class; see ast.h.
+class ZoneObject {
 
 
 
@@ -77,3 +85,5 @@ EscapePrivate
 
 
 
+The Zone is used to hold temporary data structures like
+// the abstract syntax tree, which is deallocated after compilation.
