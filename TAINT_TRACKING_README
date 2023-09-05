@@ -101,8 +101,8 @@ need to be changed depending on what system you're on.
 
   */
   # Change this to point to the installation directory
-  export CHROMEDIR="/home/billy/docs/source/chromium_taint_tracking/src";
-
+  # export CHROMEDIR="/home/billy/docs/source/chromium_taint_tracking/src";
+  export CHROMEDIR="/home/suzy/nwjs/src"
   /*
 
   Suzy: I use newer Chromium, all the debian_wheezy_amd64-sysroot below should be substitued with debian_bullseye_amd64-sysroot
@@ -113,7 +113,11 @@ need to be changed depending on what system you're on.
 
   */
 
-  export SYSROOT="$CHROMEDIR/build/linux/debian_wheezy_amd64-sysroot"
+  # export SYSROOT="$CHROMEDIR/build/linux/debian_wheezy_amd64-sysroot"
+  # export CXX="$CHROMEDIR/third_party/llvm-build/Release+Asserts/bin/clang++";
+  # export CC="$CHROMEDIR/third_party/llvm-build/Release+Asserts/bin/clang"
+
+  export SYSROOT="$CHROMEDIR/build/linux/debian_sid_amd64-sysroot"
   export CXX="$CHROMEDIR/third_party/llvm-build/Release+Asserts/bin/clang++";
   export CC="$CHROMEDIR/third_party/llvm-build/Release+Asserts/bin/clang"
 
@@ -197,6 +201,8 @@ library.
 
 export PKG_CONFIG_PATH="./build/linux/ubuntu_precise_amd64-sysroot/usr/share/pkgconfig"
 
+export PKG_CONFIG_PATH="./build/linux/debian_sid_amd64-sysroot/usr/share/pkgconfig"
+
 If you installed capnp into a directory that is not on your path (you likely
 did this if you used the --prefix) argument, then you need to add the bin
 directory of capnp to your path using this environment variable. If you don't
@@ -206,6 +212,11 @@ cannot find libcapnp[version].so.
 
 # Change this to your directory
 export CAPNP_INSTALL="/home/billy/projects/capnproto-install-clang"
+export PATH="$PATH:$CAPNP_INSTALL/bin"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CAPNP_INSTALL/lib"
+
+// in my case: /home/suzy/Documents/capnproto-install-clang
+export CAPNP_INSTALL="/home/suzy/Documents/capnproto-install-clang"
 export PATH="$PATH:$CAPNP_INSTALL/bin"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CAPNP_INSTALL/lib"
 
@@ -230,8 +241,8 @@ unix-es, the default install is in "/usr/local" if installed from source. If
 you change this directory via --prefix during configure time, it will be
 different.
 
-  v8_capnp_include_dir = "/home/billy/projects/capnproto-install-clang"
-
+// v8_capnp_include_dir = "/home/billy/projects/capnproto-install-clang"
+v8_capnp_include_dir =  "/home/suzy/Documents/capnproto-install-clang"
 
 Then run the build command:
 
