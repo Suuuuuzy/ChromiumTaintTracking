@@ -87,3 +87,71 @@ EscapePrivate
 
 The Zone is used to hold temporary data structures like
 // the abstract syntax tree, which is deallocated after compilation.
+
+
+
+../../v8/src/taint_tracking/ast_serialization.cc:227:16: error: no viable conversion from 'Handle<v8::internal::Oddball>' to 'Handle<v8::internal::Object>'
+
+../../v8/src/api/api.cc:5666:60: error: no member named 'GetIsolate' in 'v8::internal::String'
+
+add 
+v8::Isolate* String::GetIsolate() const {
+  i::Isolate* isolate = Utils::OpenHandle(this)->GetIsolate();
+  return reinterpret_cast<Isolate*>(isolate);
+}
+in api.cc
+
+no Getisolate in String
+NEVER_READ_ONLY_SPACE_IMPL(String)
+
+
+../../v8/src/taint_tracking/ast_serialization.cc:150:18: error: no viable conversion from 'Handle<v8::internal::Oddball>' to 'Handle<v8::internal::Object>'
+
+../../v8/src/taint_tracking/ast_serialization.cc:165:12: error: member access into incomplete type 'v8::internal::LookupIterator'
+
+add 
+#include "src/objects/lookup.h"
+#include "v8/src/roots/roots.h"
+in v8/src/taint_tracking.h
+
+
+
+../../v8/src/objects/lookup.h:119:39: error: member access into incomplete type 'v8::internal::Isolate'
+  Heap* heap() const { return isolate_->heap(); }
+                                      ^
+../../v8/include/v8-internal.h:24:7: note: forward declaration of 'v8::internal::Isolate'
+class Isolate;
+
+move #include "src/objects/lookup.h"
+to v8/src/taint_tracking/ast_serialization.h
+
+
+../../v8/src/taint_tracking/symbolic_state.cc:267:55: error: member reference type 'v8::internal::Map' is not a pointer; did you mean to use '.'?
+typeinfo << Handle<HeapObject>::cast(value)->map()->instance_type();
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+                                                  .
+
+
+
+
+
+../../v8/src/taint_tracking/object_versioner.cc:442:18: error: no viable conversion from 'Handle<v8::internal::HeapNumber>' to 'Handle<v8::internal::HeapObject>'
+                 isolate_->factory()->NewHeapNumber(tag.GetUniqueId()));
+                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+add #include "src/objects/heap-number.h"
+in taint_tracking.h
+
+
+add #include "src/heap/factory-inl.h"
+in ../../v8/src/taint_tracking/ast_serialization.h
+
+../../v8/src/strings/uri.cc:185:29: error: no matching function for call to 'GetTaintStatus'
+      taint_data->push_back(tainttracking::GetTaintStatus(*uri, k));
+                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../../v8/src/taint_tracking.h:269:30: note: candidate template ignored: could not match 'T *' against 'v8::internal::String'
+
+
+      taint_data->push_back(tainttracking::GetTaintStatus(uri, k));
+
+change the def in taint_tracking.cc
