@@ -386,3 +386,28 @@ std::unique_ptr<LogListener>& getGlobalLogListener() {
 
 std::unique_ptr<LogListener>& global_log_listener = getGlobalLogListener();
 
+
+An Isolate is an independant copy of the V8 runtime which includes its own heap. Two different Isolates can run in parallel and can be seen as entirely different sandboxed instances of a V8 runtime.
+
+
+why do we need isolate in taint_tracker?
+
+
+V8NodeLabelSerializer
+has one variable: isolate_
+need isolate to generate rawString
+get isolate by Isolate::Current()
+not sure
+
+
+GenerateTaintTrackingHook
+need an ASTnode to do the hook, that's why we need a proxy
+
+v8 or v8::internal???
+
+
+../../v8/src/taint_tracking/taint_tracking.cc:81:30: error: declaration requires an exit-time destructor [-Werror,-Wexit-time-destructors]
+
+
+../../v8/src/taint_tracking/taint_tracking.cc:193:7: error: use of undeclared identifier 'FLAG_taint_tracking_write_packed_logs'
+
