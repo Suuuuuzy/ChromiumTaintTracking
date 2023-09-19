@@ -155,3 +155,31 @@ in ../../v8/src/taint_tracking/ast_serialization.h
       taint_data->push_back(tainttracking::GetTaintStatus(uri, k));
 
 change the def in taint_tracking.cc
+
+
+../../v8/src/taint_tracking/ast_serialization.cc:957:28: error: implicit conversion loses integer precision: 'std::vector<std::unique_ptr<tainttracking::SymbolicStackFrame>>::size_type' (aka 'unsigned long') to 'uint32_t' (aka 'unsigned int') [-Werror,-Wshorten-64-to-32]
+  return executing_frames_.size();
+  ~~~~~~ ~~~~~~~~~~~~~~~~~~^~~~~~
+
+../../v8/src/taint_tracking/ast_serialization.cc:681:16: error: implicit conversion loses integer precision: 'std::vector<tainttracking::SymbolicMemorySlot>::size_type' (aka 'unsigned long') to 'uint32_t' (aka 'unsigned int') [-Werror,-Wshorten-64-to-32]
+  return args_.size();
+  ~~~~~~ ~~~~~~^~~~~~
+
+change to 
+size_t SymbolicStackFrame::NumArgs() const {
+  return args_.size();
+}
+
+
+
+error: declaration requires an exit-time destructor [-Werror,-Wexit-time-destructors]
+std::unique_ptr<LogListener> global_log_listener;
+
+solution: 
+std::unique_ptr<LogListener>& getGlobalLogListener() {
+    static std::unique_ptr<LogListener> global_log_listener(new LogListener);
+    return global_log_listener;
+}
+
+std::unique_ptr<LogListener>& global_log_listener = getGlobalLogListener();
+
