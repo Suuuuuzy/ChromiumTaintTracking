@@ -387,7 +387,16 @@ std::unique_ptr<LogListener>& getGlobalLogListener() {
 std::unique_ptr<LogListener>& global_log_listener = getGlobalLogListener();
 
 
-An Isolate is an independant copy of the V8 runtime which includes its own heap. Two different Isolates can run in parallel and can be seen as entirely different sandboxed instances of a V8 runtime.
+// An Isolate is an independant copy of the V8 runtime which includes its own heap. Two different Isolates can run in parallel and can be seen as entirely different sandboxed instances of a V8 runtime.
+
+/**
+ * Isolate represents an isolated instance of the V8 engine.  V8 isolates have
+ * completely separate states.  Objects from one isolate must not be used in
+ * other isolates.  The embedder can create multiple isolates and use them in
+ * parallel in multiple threads.  An isolate can be entered by at most one
+ * thread at any given time.  The Locker/Unlocker API must be used to
+ * synchronize.
+ */
 
 
 why do we need isolate in taint_tracker?
@@ -411,3 +420,257 @@ v8 or v8::internal???
 
 ../../v8/src/taint_tracking/taint_tracking.cc:193:7: error: use of undeclared identifier 'FLAG_taint_tracking_write_packed_logs'
 
+../../v8/src/json/json-stringifier.cc:899:32: error: type 'v8::internal::String' does not provide a subscript operator
+          SrcChar next = (*src)[i + 1];
+solution:
+          SrcChar next = vector[i + 1];
+
+
+MUST_USE_RESULT
+->
+V8_WARN_UNUSED_RESULT
+
+
+in v8/src/heap/factory-base.cc
+
+
+in v8/src/taint_tracking/taint_tracking.cc
+how to get a Handle<String> from a String?
+  V8_INLINE Handle(T object, Isolate* isolate);
+
+how to get the isolate?
+
+
+JSRegExp
+
+
+
+../../v8/src/taint_tracking/taint_tracking.cc:454:11: error: no matching member function for call to 'CopyJsStringSlow'
+          CopyJsStringSlow(out_reg.initSource(), String::cast(source));
+          ^~~~~~~~~~~~~~~~
+
+
+in v8/src/taint_tracking/ast_serialization.cc:
+class FunctionLiteral final : public Expression {
+ public:
+  enum FunctionType {
+    kAnonymousExpression,
+    kNamedExpression,
+    kDeclaration,
+    kAccessorOrMethod
+  };
+
+  ->
+
+  enum class FunctionSyntaxKind : uint8_t {
+  kAnonymousExpression,
+  kNamedExpression,
+  kDeclaration,
+  kAccessorOrMethod,
+  kWrapped,
+
+  kLastFunctionSyntaxKind = kWrapped,
+};
+
+
+in v8/src/objects/shared-function-info.h
+  DECL_RELEASE_ACQUIRE_ACCESSORS(taint_node_label, Object)
+
+  DECL_RELEASE_ACQUIRE_ACCESSORS(name_or_scope_info, Object)
+
+add one parameter when calling
+
+
+in function-kind.h
+enum FunctionKind : uint8_t {
+  // BEGIN constructable functions
+  kNormalFunction,
+  kModule,
+  kAsyncModule,
+  // BEGIN class constructors
+  // BEGIN base constructors
+  kBaseConstructor,
+  // BEGIN default constructors
+  kDefaultBaseConstructor,
+  // END base constructors
+  // BEGIN derived constructors
+  kDefaultDerivedConstructor,
+  // END default constructors
+  kDerivedConstructor,
+  // END derived constructors
+  // END class constructors
+  // END constructable functions.
+  // BEGIN accessors
+  kGetterFunction,
+  kStaticGetterFunction,
+  kSetterFunction,
+  kStaticSetterFunction,
+  // END accessors
+  // BEGIN arrow functions
+  kArrowFunction,
+  // BEGIN async functions
+  kAsyncArrowFunction,
+  // END arrow functions
+  kAsyncFunction,
+  // BEGIN concise methods 1
+  kAsyncConciseMethod,
+  kStaticAsyncConciseMethod,
+  // BEGIN generators
+  kAsyncConciseGeneratorMethod,
+  kStaticAsyncConciseGeneratorMethod,
+  // END concise methods 1
+  kAsyncGeneratorFunction,
+  // END async functions
+  kGeneratorFunction,
+  // BEGIN concise methods 2
+  kConciseGeneratorMethod,
+  kStaticConciseGeneratorMethod,
+  // END generators
+  kConciseMethod,
+  kStaticConciseMethod,
+  kClassMembersInitializerFunction,
+  kClassStaticInitializerFunction,
+  // END concise methods 2
+
+  kLastFunctionKind = kClassStaticInitializerFunction,
+};
+
+
+
+
+// in code-kind.h
+#define CODE_KIND_LIST(V)       \
+  V(BYTECODE_HANDLER)           \
+  V(FOR_TESTING)                \
+  V(BUILTIN)                    \
+  V(REGEXP)                     \
+  V(WASM_FUNCTION)              \
+  V(WASM_TO_CAPI_FUNCTION)      \
+  V(WASM_TO_JS_FUNCTION)        \
+  V(JS_TO_WASM_FUNCTION)        \
+  V(JS_TO_JS_FUNCTION)          \
+  V(C_WASM_ENTRY)               \
+  V(INTERPRETED_FUNCTION)       \
+  V(BASELINE)                   \
+  V(TURBOPROP)                  \
+  V(TURBOFAN)
+
+enum class CodeKind {
+#define DEFINE_CODE_KIND_ENUM(name) name,
+  CODE_KIND_LIST(DEFINE_CODE_KIND_ENUM)
+#undef DEFINE_CODE_KIND_ENUM
+};
+
+
+
+../../v8/src/taint_tracking/taint_tracking.cc:532:24: error: no viable conversion from 'Handle<int>' to 'Handle<v8::internal::Object>'
+        Handle<Object> serial_num = handle(
+                       ^            ~~~~~~~
+how to convert int to obj?
+
+
+
+enum class VariableMode : uint8_t {
+  // User declared variables:
+  kLet,  // declared via 'let' declarations (first lexical)
+
+  kConst,  // declared via 'const' declarations (last lexical)
+
+  kVar,  // declared via 'var', and 'function' declarations
+
+  // Variables introduced by the compiler:
+  kTemporary,  // temporary variables (not user-visible), stack-allocated
+               // unless the scope as a whole has forced context allocation
+
+  kDynamic,  // always require dynamic lookup (we don't know
+             // the declaration)
+
+  kDynamicGlobal,  // requires dynamic lookup, but we know that the
+                   // variable is global unless it has been shadowed
+                   // by an eval-introduced variable
+
+  kDynamicLocal,  // requires dynamic lookup, but we know that the
+                  // variable is local and where it is unless it
+                  // has been shadowed by an eval-introduced
+                  // variable
+
+  // Variables for private methods or accessors whose access require
+  // brand check. Declared only in class scopes by the compiler
+  // and allocated only in class contexts:
+  kPrivateMethod,  // Does not coexist with any other variable with the same
+                   // name in the same scope.
+
+  kPrivateSetterOnly,  // Incompatible with variables with the same name but
+                       // any mode other than kPrivateGetterOnly. Transition to
+                       // kPrivateGetterAndSetter if a later declaration for the
+                       // same name with kPrivateGetterOnly is made.
+
+  kPrivateGetterOnly,  // Incompatible with variables with the same name but
+                       // any mode other than kPrivateSetterOnly. Transition to
+                       // kPrivateGetterAndSetter if a later declaration for the
+                       // same name with kPrivateSetterOnly is made.
+
+  kPrivateGetterAndSetter,  // Does not coexist with any other variable with the
+                            // same name in the same scope.
+
+  kLastLexicalVariableMode = kConst,
+};
+
+
+
+
+../../v8/src/heap/factory.cc:1042:26: error: redefinition of 'no_gc' with a different type: 'v8::internal::DisallowHeapAllocation' (aka 'PerThreadAssertScopeDebugOnly<HEAP_ALLOCATION_ASSERT, false>') vs 'v8::internal::DisallowGarbageCollection' (aka 'CombinationAssertScope<PerThreadAssertScopeDebugOnly<SAFEPOINTS_ASSERT, false>, PerThreadAssertScopeDebugOnly<HEAP_ALLOCATION_ASSERT, false>>')
+  DisallowHeapAllocation no_gc;
+                         ^
+../../v8/src/heap/factory.cc:1035:29: note: previous definition is here
+  DisallowGarbageCollection no_gc;
+                            ^
+  what's the purpose?
+
+
+
+  ../../v8/src/heap/factory.cc:1237:61: error: no viable conversion from 'v8::internal::Context' to 'v8::internal::Handle<v8::internal::Context>'
+    tainttracking::RuntimeOnCatch(isolate(), thrown_object, context);
+                                                            ^~~~~~~
+../../v8/src/handles/handles.h:89:7: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'v8::internal::Context' to 'const v8::internal::Handle<v8::internal::Context> &' for 1st argument
+class Handle final : public HandleBase {
+      ^
+../../v8/src/handles/handles.h:89:7: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'v8::internal::Context' to 'v8::internal::Handle<v8::internal::Context> &&' for 1st argument
+../../v8/src/handles/handles.h:132:13: note: candidate template ignored: could not match 'Handle<type-parameter-0-0>' against 'v8::internal::Context'
+  V8_INLINE Handle(Handle<S> handle) : HandleBase(handle) {}
+            ^
+../../v8/src/handles/handles.h:113:22: note: explicit constructor is not a candidate
+  V8_INLINE explicit Handle(Address* location) : HandleBase(location) {
+                     ^
+../../v8/src/objects/tagged-impl.h:41:3: note: candidate function
+  operator bool() const = delete;
+  ^
+../../v8/src/taint_tracking.h:424:65: note: passing argument to parameter 'context' here
+                    v8::internal::Handle<v8::internal::Context> context);
+                                                                ^
+18 errors generated.
+
+
+
+OnNewSlicedString
+OnNewSubStringCopy
+
+OnNewStringLiteral
+OnNewExternalString
+
+
+
+../../v8/src/taint_tracking/taint_tracking.cc:514:27: error: unused variable 'ser' [-Werror,-Wunused-variable]
+        BuilderSerializer ser;
+CHECK_EQ(Status::OK, ser.Serialize(fn.initFnLabel(), label));
+
+
+参考两个isolate 转换
+void Recorder::SetRecorder(
+    Isolate* isolate,
+    const std::shared_ptr<v8::metrics::Recorder>& embedder_recorder) {
+  foreground_task_runner_ = V8::GetCurrentPlatform()->GetForegroundTaskRunner(
+      reinterpret_cast<v8::Isolate*>(isolate));
+  CHECK_NULL(embedder_recorder_);
+  embedder_recorder_ = embedder_recorder;
+}
