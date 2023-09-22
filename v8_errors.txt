@@ -674,3 +674,55 @@ void Recorder::SetRecorder(
   CHECK_NULL(embedder_recorder_);
   embedder_recorder_ = embedder_recorder;
 }
+
+
+../../v8/src/objects/shared-function-info-inl.h:119:73: error: use of undeclared identifier 'kTaintTrackingNodeLabel'
+
+'kTaintTrackingNodeLabel' not defined
+
+definition should be in /home/suzy/nwjs/src/out/nw/gen/v8/torque-generated/src/objects/shared-function-info-tq.inc
+generated from
+/home/suzy/nwjs/src/v8/src/objects/shared-function-info.tq
+
+we see the generation of Offset variables
+define variable in 
+/home/suzy/nwjs/src/v8/src/objects/shared-function-info.tq
+
+
+
+../../v8/src/builtins/builtins-string.cc:502:33: error: indirection requires pointer operand ('v8::internal::JSArrayBuffer' invalid)
+len = static_cast<int>(taint_data.byte_length());
+// if (!taint_data.byte_length()->ToInt32()) {
+// THROW_NEW_ERROR_RETURN_FAILURE(
+// isolate, NewTypeError(MessageTemplate::kInvalidArgument, taint_arg));
+// }
+
+
+
+->
+
+
+if (!Object::cast(taint_data.byte_length())->ToInt32(&len)) {
+THROW_NEW_ERROR_RETURN_FAILURE(
+isolate, NewTypeError(MessageTemplate::kInvalidArgument, taint_arg));
+}
+
+
+
+../../v8/src/builtins/builtins-string.cc:523:10: error: no viable conversion from returned value of type 'v8::Handle<v8::internal::JSArrayBuffer>' (aka 'Local<v8::internal::JSArrayBuffer>') to function return type 'v8::internal::Object'
+
+BUILTIN(StringPrototypeGetTaint) {
+HandleScope scope(isolate);
+TO_THIS_STRING(string, "String.prototype.__getTaint__");
+return Object::cast(tainttracking::JSGetTaintStatus(string, isolate));
+}
+
+
+../../v8/src/execution/execution.cc:361:31: error: no member named 'undefined_value' in 'v8::internal::Heap'
+      handle(isolate->heap()->undefined_value(), isolate));
+
+
+../../v8/src/builtins/builtins-string.cc:523:10: error: no viable conversion from returned value of type 'v8::internal::JSArrayBuffer *' to function return type 'v8::internal::Object'
+
+
+../../v8/src/taint_tracking.h:229:19: error: no type named 'SeqOneByteString' in namespace 'v8::internal'
