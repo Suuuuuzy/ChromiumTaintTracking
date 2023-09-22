@@ -1,0 +1,59 @@
+
+export CHROMEDIR="/home/suzy/nwjs/src";
+export CXX="$CHROMEDIR/third_party/llvm-build/Release+Asserts/bin/clang++";
+export CC="$CHROMEDIR/third_party/llvm-build/Release+Asserts/bin/clang"
+export SYSROOT="$CHROMEDIR/build/linux/debian_sid_amd64-sysroot"
+
+
+export CXXFLAGS="--sysroot=$SYSROOT -O3 -pthread -std=c++11 -D_GLIBCXX_USE_CLOCK_REALTIME";
+
+
+export CXXFLAGS="--sysroot=$SYSROOT -O3 -std=c++11"
+
+export LDFLAGS="-L$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/lib/x86_64-linux-gnu -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/lib/x86_64-linux-gnu -L$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib/x86_64-linux-gnu -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib/x86_64-linux-gnu -L$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib -Wl,-rpath-link=$CHROMEDIR/out/Debug -L$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib/gcc/x86_64-linux-gnu/10 -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib/gcc/x86_64-linux-gnu/10"
+
+
+
+
+
+
+cd c++
+./setup-autotools.sh
+autoreconf -i
+./configure --with-sysroot="$SYSROOT" --prefix="/home/suzy/Documents/capnproto-install-clang"
+make -j8 check
+
+
+
+error:
+./src/kj/parse/common.h:163:11: error: missing 'typename' prior to dependent type template name 'ParserRef<Input, Output>::WrapperImpl'
+
+missing 'typename' prior to dependent type template name 'ParserRef<Input, Output>::WrapperImpl'
+
+fix:
+./src/kj/common.h
+constexpr typename ParserRef<Input, Output>::template WrapperImpl<ParserImpl>
+
+
+src/kj/async-unix.c++:91:20: error: no member named 'monotonic_clock' in namespace 'std::chrono'
+change from monotonic_clock to steady_clock
+
+
+error:
+src/kj/array-test.c++:23:10: fatal error: 'gtest/gtest.h' file not found
+
+
+gtest/gtest.h is not found
+remove the line of gtest
+src/kj/memory-test.c++:23:10: fatal error: 'gtest/gtest.h' file not found
+
+fix:
+./setup-autotools.sh
+
+
+test failed:
+version `GLIBCXX_3.4.26' not found
+install g++7 solves this
+
+install success!
+
