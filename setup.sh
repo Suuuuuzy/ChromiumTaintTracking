@@ -28,3 +28,9 @@ flag during linking and do at least one of the following:
      during linking
    - use the '-Wl,-rpath -Wl,LIBDIR' linker flag
    - have your system administrator add LIBDIR to '/etc/ld.so.conf'
+
+
+
+
+   ninja -C out/nw nwjs &> allout.log
+   

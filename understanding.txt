@@ -55,3 +55,16 @@ TaintType GetTaintStatus();
 // ast_serialization.cc
 FunctionLiteral
 syntax_kind, kind, scope
+
+
+a lot of type conversion errors
+
+
+
+change the paras of OnNewConcatStringCopy to Handles
+
+
+InitTaintData to Handles
+
+
+InitTaintSeqByteString
