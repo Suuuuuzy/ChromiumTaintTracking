@@ -1,0 +1,57 @@
+SeqOneByteString: The simplest, contains a few header fields and then the string's bytes (not UTF-8 encoded, can only contain characters in the first 256 unicode code points)
+SeqTwoByteString: Same, but uses two bytes for each character (using surrogate pairs to represent unicode characters that can't be represented in two bytes).
+SlicedString: A substring of some other string. Contains a pointer to the "parent" string and an offset and length.
+ConsString: The result of adding two strings (if over a certain size). Contains pointers to both strings (which may themselves be any of these types of strings).
+ExternalString: Used for strings that have been passed in from outside of V8.
+
+
+All these have a common parent class String,
+HeapObject has one field: the pointer to its Map
+Name adds one additional field: a hash value.
+String adds another field: the length.
+
+On a 64-bit system, each one is 8 bytes.
+
+
+0:  map (string type)
+4:  length (in characters)
+8:  hash code (lazily computed)
+12:  characters...
+
+
+
+// TaintTracking
+TaintFlag; //uint32_t
+TaintData; // uint_8_t
+// in v8/include/v8.h
+// TaintType, 0~20 , 32-224: encoding types 
+// (this is the 8 bits used for taint propagating);
+
+class MessageHolder;
+class TaintVisitor;
+    void run(T* source, int start, int len);
+        VisitIntoStringTemplate
+            DoVisit(source->GetChars(), StringTaintData(source), from, len);
+                Visit(visitee, taint_info, offset, size);
+                    segments_.push_back((visitee + offset, true, size));
+    StringTaintData(str)
+        return str->GetTaintChars();
+    std::vector<std::tuple<String*, int, int>> visitee_stack_; 
+    //source, start, len
+    String* visitee_;
+    bool writeable_;
+
+class StringCopier : public TaintVisitor
+    void Visit
+    void Build
+    std::vector<std::tuple<const uint8_t*, bool, int>> segments_; 
+    //(visitee + offset, true, size)
+
+class CopyVisitor : public TaintVisitor;
+
+TaintType GetTaintStatus();
+
+
+// ast_serialization.cc
+FunctionLiteral
+syntax_kind, kind, scope

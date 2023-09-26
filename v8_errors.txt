@@ -121,7 +121,9 @@ in v8/src/taint_tracking.h
 // - Object
 //   - Smi          (immediate small integer)
 //   - TaggedIndex  (properly sign-extended immediate small integer)
-//   - HeapObject   (superclass for everything allocated in the heap)
+//   - HeapObject   
+//     (superclass for everything allocated in the heap, it has only one filed:
+//     pointer to its map)
 //     - JSReceiver  (suitable for property access)
 //       - JSObject
 //         - JSArray
@@ -726,3 +728,57 @@ return Object::cast(tainttracking::JSGetTaintStatus(string, isolate));
 
 
 ../../v8/src/taint_tracking.h:229:19: error: no type named 'SeqOneByteString' in namespace 'v8::internal'
+
+
+
+../../v8/src/taint_tracking/ast_serialization.cc:3333:35: error: no member named 'proxy' in 'v8::internal::Declaration'
+    HandleVariableProxyNode(node->proxy(), decl.initProxy());
+                            ~~~~  ^
+../../v8/src/taint_tracking/ast_serialization.cc:3334:42: error: no member named 'mode' in 'v8::internal::Declaration'
+    decl.setMode(ToAstVariableMode(node->mode()));
+                                   ~~~~  ^
+../../v8/src/taint_tracking/ast_serialization.cc:3335:26: error: no member named 'scope' in 'v8::internal::Declaration'
+    ReferenceScope(node->scope(), decl.initScope());
+                   ~~~~  ^
+别人用 Declaration 都是怎么用的。。。
+
+
+ 
+../../v8/src/taint_tracking/ast_serialization.cc:3479:26: error: no member named 'next' in 'v8::internal::ForOfStatement'
+    HandleVariable(node->next(), &variable);
+                   ~~~~  ^
+
+别人用 ForOfStatement 都是怎么用的。。。
+HandleVariable(node->each(), &variable);
+
+Variable* iterator_;
+Expression* assign_iterator_;
+Expression* next_result_;
+Expression* result_done_;
+Expression* assign_each_;
+
+what is the purpose of VisitForOfStatement?
+
+old:
+stmt->assign_iterator()
+new:
+stmt->subject()
+
+
+
+../../v8/src/taint_tracking/ast_serialization.cc:3480:31: error: no member named 'assign_iterator' in 'v8::internal::ForOfStatement'
+    DO_VISIT_EXPRESSION(node, assign_iterator, forofst.initAssignIterator());
+                        ~~~~  ^
+../../v8/src/taint_tracking/ast_serialization.cc:3021:31: note: expanded from macro 'DO_VISIT_EXPRESSION'
+    SetupRecursiveVisit(NODE->GET(), BUILDER);
+                        ~~~~  ^
+../../v8/src/taint_tracking/ast_serialization.cc:3481:31: error: no member named 'next_result' in 'v8::internal::ForOfStatement'
+    DO_VISIT_EXPRESSION(node, next_result, forofst.initNextResult());
+                        ~~~~  ^
+../../v8/src/taint_tracking/ast_serialization.cc:3021:31: note: expanded from macro 'DO_VISIT_EXPRESSION'
+    SetupRecursiveVisit(NODE->GET(), BUILDER);
+                        ~~~~  ^
+../../v8/src/taint_tracking/ast_serialization.cc:3482:31: error: no member named 'result_done' in 'v8::internal::ForOfStatement'
+    DO_VISIT_EXPRESSION(node, result_done, forofst.initResultDone());
+
+
