@@ -21,11 +21,24 @@ On a 64-bit system, each one is 8 bytes.
 
 
 // TaintTracking
+datatypes:
 TaintFlag; //uint32_t
 TaintData; // uint_8_t
 // in v8/include/v8.h
 // TaintType, 0~20 , 32-224: encoding types 
 // (this is the 8 bits used for taint propagating);
+
+class TaintTracker
+    class Impl;
+
+    RegisterTaintListener: implementedin Impl
+    
+    static TaintTracker* FromIsolate
+    static TaintTracker* New
+
+
+class TaintListener
+
 
 class MessageHolder;
 class TaintVisitor;
@@ -41,6 +54,8 @@ class TaintVisitor;
     String* visitee_;
     bool writeable_;
 
+class CopyVisitor : public TaintVisitor
+
 class StringCopier : public TaintVisitor
     void Visit
     void Build
@@ -52,7 +67,25 @@ class CopyVisitor : public TaintVisitor;
 TaintType GetTaintStatus();
 
 
+
+// taint_tracking-inl.h
+class MessageHolder
+
+
+
+
+
 // ast_serialization.cc
+// This file defines how to serialize ASTs to the log file during symbolic
+// execution.
+// just ignore these files?
+// need to remove build files...bla bla, not that easy?
+
+seems to be dealing with AST node types
+what job do Handle*** functions do?
+
+
+
 FunctionLiteral
 syntax_kind, kind, scope
 
@@ -68,3 +101,44 @@ InitTaintData to Handles
 
 
 InitTaintSeqByteString
+
+
+ObjectPropertySymbolicStateManager
+
+
+
+now the passing of String paras
+
+
+
+change GetWriteableStringTaintData to String!
+how about StringTaintData?
+StringTaintData_TryAllocate
+
+
+FlattenTaint
+ConcatTaint
+
+
+change VisitIntoStringTemplate to String!
+change SetTaintStatus to String!
+change FlattenTaintData to String!
+OnNewDeserializedString
+
+  MarkNewString(source);
+  OnNewStringLiteral(source);
+
+
+
+InitTaintSeqByteString
+
+
+visitee_stack_ 里面用什么格式？
+string*, int, int
+
+
+
+FlattenTaint
+ConcatTaint
+
+GetTaintStatusRange

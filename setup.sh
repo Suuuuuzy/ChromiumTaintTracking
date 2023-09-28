@@ -32,5 +32,6 @@ flag during linking and do at least one of the following:
 
 
 
-   ninja -C out/nw nwjs &> allout.log
-   
+
+
+ninja -C out/nw nwjs &> allout.log
