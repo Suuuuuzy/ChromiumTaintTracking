@@ -97,7 +97,7 @@ a lot of type conversion errors
 change the paras of OnNewConcatStringCopy to Handles
 
 
-InitTaintData to Handles
+InitTaintData 
 
 
 InitTaintSeqByteString
@@ -112,7 +112,7 @@ now the passing of String paras
 
 
 change GetWriteableStringTaintData to String!
-how about StringTaintData?
+StringTaintData
 StringTaintData_TryAllocate
 
 
@@ -133,6 +133,11 @@ OnNewDeserializedString
 InitTaintSeqByteString
 
 
+CopyJsStringSlow
+OnNewStringLiteral
+OnNewConcatStringCopy
+
+
 visitee_stack_ 里面用什么格式？
 string*, int, int
 
@@ -142,3 +147,7 @@ FlattenTaint
 ConcatTaint
 
 GetTaintStatusRange
+
+CheckTaintError
+
+OnNewSubStringCopy

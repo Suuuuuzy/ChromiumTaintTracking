@@ -568,8 +568,8 @@ enum class CodeKind {
 ../../v8/src/taint_tracking/taint_tracking.cc:532:24: error: no viable conversion from 'Handle<int>' to 'Handle<v8::internal::Object>'
         Handle<Object> serial_num = handle(
                        ^            ~~~~~~~
-how to convert int to obj?
 
+api_builder.setSerialNumber(shared->get_api_func_data().serial_number());
 
 
 enum class VariableMode : uint8_t {
@@ -766,19 +766,30 @@ stmt->subject()
 
 
 
-../../v8/src/taint_tracking/ast_serialization.cc:3480:31: error: no member named 'assign_iterator' in 'v8::internal::ForOfStatement'
-    DO_VISIT_EXPRESSION(node, assign_iterator, forofst.initAssignIterator());
-                        ~~~~  ^
-../../v8/src/taint_tracking/ast_serialization.cc:3021:31: note: expanded from macro 'DO_VISIT_EXPRESSION'
-    SetupRecursiveVisit(NODE->GET(), BUILDER);
-                        ~~~~  ^
-../../v8/src/taint_tracking/ast_serialization.cc:3481:31: error: no member named 'next_result' in 'v8::internal::ForOfStatement'
-    DO_VISIT_EXPRESSION(node, next_result, forofst.initNextResult());
-                        ~~~~  ^
-../../v8/src/taint_tracking/ast_serialization.cc:3021:31: note: expanded from macro 'DO_VISIT_EXPRESSION'
-    SetupRecursiveVisit(NODE->GET(), BUILDER);
-                        ~~~~  ^
-../../v8/src/taint_tracking/ast_serialization.cc:3482:31: error: no member named 'result_done' in 'v8::internal::ForOfStatement'
-    DO_VISIT_EXPRESSION(node, result_done, forofst.initResultDone());
+../../v8/src/taint_tracking/taint_tracking.cc:471:53: error: implicit conversion loses integer precision: 'std::vector<capnp::schemas::Flag_860d5c0f57b2e318>::size_type' (aka 'unsigned long') to 'unsigned int' [-Werror,-Wshorten-64-to-32]
 
 
+../../v8/src/taint_tracking/taint_tracking.cc:619:9: error: attempt to use a deleted function
+    if (native_context) {
+        ^
+../../v8/src/objects/tagged-impl.h:41:3: note: 'operator bool' has been explicitly marked deleted here
+  operator bool() const = delete;
+
+
+
+
+../../v8/src/taint_tracking/taint_tracking.cc:663:31: error: no member named 'CallOnBackgroundThread' in 'v8::Platform'
+    V8::GetCurrentPlatform()->CallOnBackgroundThread(
+    ~~~~~~~~~~~~~~~~~~~~~~~~  ^
+
+
+../../v8/src/taint_tracking/taint_tracking.cc:525:24: error: no viable conversion from 'Handle<int>' to 'Handle<v8::internal::Object>'
+
+
+
+../../v8/src/taint_tracking/taint_tracking.cc:582:49: error: no member named 'name' in 'v8::internal::Symbol'
+            handle(Handle<Symbol>::cast(value)->name(), isolate)).
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+
+
+change to description

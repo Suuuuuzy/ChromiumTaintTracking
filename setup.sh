@@ -8,7 +8,7 @@
   export CXXFLAGS="--sysroot=$SYSROOT -O3 -B$CHROMEDIR/third_party/binutils/Linux_x64/Release/bin -std=c++11 -D_GLIBCXX_USE_CLOCK_REALTIME";
 
   export LDFLAGS="-B$CHROMEDIR/third_party/binutils/Linux_x64/Release/bin"
-  export LDFLAGS="-L$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/lib/x86_64-linux-gnu -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_wheezy_amd64-sysroot/lib/x86_64-linux-gnu -L$CHROMEDIR/build/linux/debian_wheezy_amd64-sysroot/usr/lib/x86_64-linux-gnu -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_wheezy_amd64-sysroot/usr/lib/x86_64-linux-gnu -L$CHROMEDIR/build/linux/debian_wheezy_amd64-sysroot/usr/lib -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_wheezy_amd64-sysroot/usr/lib -Wl,-rpath-link=$CHROMEDIR/out/Debug -B$CHROMEDIR/third_party/binutils/Linux_x64/Release/bin -L$CHROMEDIR/build/linux/debian_wheezy_amd64-sysroot/usr/lib/gcc/x86_64-linux-gnu/4.6 -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_wheezy_amd64-sysroot/usr/lib/gcc/x86_64-linux-gnu/4.6"
+  export LDFLAGS="-L$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/lib/x86_64-linux-gnu -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/lib/x86_64-linux-gnu -L$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib/x86_64-linux-gnu -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib/x86_64-linux-gnu -L$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib -Wl,-rpath-link=$CHROMEDIR/out/Debug -B$CHROMEDIR/third_party/binutils/Linux_x64/Release/bin -L$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib/gcc/x86_64-linux-gnu/10 -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib/gcc/x86_64-linux-gnu/10"
 
   cd c++
   autoreconf -i
