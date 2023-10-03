@@ -775,17 +775,16 @@ stmt->subject()
 ../../v8/src/objects/tagged-impl.h:41:3: note: 'operator bool' has been explicitly marked deleted here
   operator bool() const = delete;
 
-
+done
 
 
 ../../v8/src/taint_tracking/taint_tracking.cc:663:31: error: no member named 'CallOnBackgroundThread' in 'v8::Platform'
     V8::GetCurrentPlatform()->CallOnBackgroundThread(
     ~~~~~~~~~~~~~~~~~~~~~~~~  ^
-
+done
 
 ../../v8/src/taint_tracking/taint_tracking.cc:525:24: error: no viable conversion from 'Handle<int>' to 'Handle<v8::internal::Object>'
-
-
+done
 
 ../../v8/src/taint_tracking/taint_tracking.cc:582:49: error: no member named 'name' in 'v8::internal::Symbol'
             handle(Handle<Symbol>::cast(value)->name(), isolate)).

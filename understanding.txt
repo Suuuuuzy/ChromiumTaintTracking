@@ -142,7 +142,6 @@ visitee_stack_ 里面用什么格式？
 string*, int, int
 
 
-
 FlattenTaint
 ConcatTaint
 
@@ -151,3 +150,11 @@ GetTaintStatusRange
 CheckTaintError
 
 OnNewSubStringCopy
+
+can we change Stirng to String & ?
+先不管
+
+加了三个global函数
+GlobalPrintToTaintLog
+GlobalSetTaint
+GlobalTaintConstants
