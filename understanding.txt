@@ -24,10 +24,57 @@ On a 64-bit system, each one is 8 bytes.
 datatypes:
 TaintFlag; //uint32_t
 TaintData; // uint_8_t
+
 // in v8/include/v8.h
+TaintType;
 // TaintType, 0~20 , 32-224: encoding types 
 // (this is the 8 bits used for taint propagating);
 
+  enum TaintType {
+    UNTAINTED = 0,
+    TAINTED = 1,
+    COOKIE = 2,
+    MESSAGE = 3,
+    URL = 4,
+    URL_HASH = 5,
+    URL_PROTOCOL = 6,
+    URL_HOST = 7,
+    URL_HOSTNAME = 8,
+    URL_ORIGIN = 9,
+    URL_PORT = 10,
+    URL_PATHNAME = 11,
+    URL_SEARCH = 12,
+    DOM = 13,
+    REFERRER = 14,
+    WINDOWNAME = 15,
+    STORAGE = 16,
+    NETWORK = 17,
+    MULTIPLE_TAINTS = 18,       // Used when combining multiple bytes with
+                                // different taints.
+    MESSAGE_ORIGIN = 19,
+
+    // This must be less than the value of URL_ENCODED
+    MAX_TAINT_TYPE = 20,
+
+    // Encoding types
+    URL_ENCODED = 32,            // 1 << 5
+    URL_COMPONENT_ENCODED = 64,  // 2 << 5
+    ESCAPE_ENCODED = 96,         // 3 << 5
+    MULTIPLE_ENCODINGS = 128,    // 4 << 5
+    URL_DECODED = 160,           // 5 << 5
+    URL_COMPONENT_DECODED = 192, // 6 << 5
+    ESCAPE_DECODED = 224,        // 7 << 5
+
+    NO_ENCODING = 0,            // Must use the encoding mask to compare to no
+                                // encoding.
+
+    // Masks
+    TAINT_TYPE_MASK = 31,       // 1 << 5 - 1 (all ones in lower 5 bits)
+    ENCODING_TYPE_MASK = 224   // 7 << 5 (all ones in top 3 bits)
+  };
+
+
+  
 class TaintTracker
     class Impl;
 
@@ -158,3 +205,59 @@ can we change Stirng to String & ?
 GlobalPrintToTaintLog
 GlobalSetTaint
 GlobalTaintConstants
+
+
+GenerateTaintTrackingHook
+
+JsonParser
+internal variables:
+  
+  Isolate* isolate_;
+  const uint64_t hash_seed_;
+  JsonToken next_;
+  // Indicates whether the bytes underneath source_ can relocate during GC.
+  bool chars_may_relocate_;
+  Handle<JSFunction> object_constructor_;
+  const Handle<String> original_source_;
+  Handle<String> source_;
+  
+  const Char* cursor_;
+  const Char* end_;
+  const Char* chars_;
+
+
+
+
+ParseJson is the function to parse json string
+
+ParseJson()
+    ParseJsonValue()
+        value = MakeString(ScanJsonString(false));
+        MakeString return type: Handle<String>
+        
+        --- in old: ParseJsonString()
+            Handle<String> ParseJsonString() {
+                return ScanJsonString<false>();
+            }
+            
+
+
+
+if there's string in property key, it will be handled by ScanJsonString
+
+
+
+JsonParser<Char>::JsonParser(Isolate* isolate, Handle<String> source)
+    : isolate_(isolate),
+      hash_seed_(HashSeed(isolate)),
+      object_constructor_(isolate_->object_function()),
+      original_source_(source) 
+
+what does
+UpdatePointers
+do
+
+
+who initialize next_?
+
+void advance() { ++cursor_; }
