@@ -111,8 +111,14 @@ class StringCopier : public TaintVisitor
 
 class CopyVisitor : public TaintVisitor;
 
-TaintType GetTaintStatus();
 
+template <class T>
+TaintType GetTaintStatus(T* object, size_t idx) {
+  TaintData output;
+  CopyVisitor visitor(&output);
+  visitor.run(object, idx, 1);
+  return static_cast<TaintType>(output);
+}
 
 
 // taint_tracking-inl.h
@@ -234,12 +240,16 @@ ParseJson()
     ParseJsonValue()
         value = MakeString(ScanJsonString(false));
         MakeString return type: Handle<String>
-        
+            return DecodeString(string, intermediate, hint);
+                DecodeString(dest, string.start(), string.length());
         --- in old: ParseJsonString()
             Handle<String> ParseJsonString() {
                 return ScanJsonString<false>();
             }
-            
+
+
+class JsonString
+
 
 
 
@@ -261,3 +271,62 @@ do
 who initialize next_?
 
 void advance() { ++cursor_; }
+
+
+for old version
+
+ScanJsonString
+skip whitespace
+\\ check the next char, see if it's \u or else, return right away
+SlowScanJsonString
+
+
+
+tainttracking::OnNewFromJsonString(result, *source_);
+JsonString
+
+
+FlattenTaint
+    FlattenTaintData(source, GetWriteableStringTaintData(dest),
+                   from_offset, from_len);
+
+
+template <class T>
+void FlattenTaintData(T* source, TaintData* dest,
+                      int from_offset, int from_len) {
+  CopyVisitor visitor(dest);
+  visitor.run(source, from_offset, from_len);
+}
+
+
+template<> TaintData* GetWriteableStringTaintData<SeqOneByteString>(
+    SeqOneByteString* str) {
+  return StringTaintData(str);
+}
+
+
+template <> TaintData* StringTaintData<SeqOneByteString>(
+    SeqOneByteString* str) {
+  return str->GetTaintChars();
+}
+
+byte* SeqOneByteString::GetTaintChars() {
+  return reinterpret_cast<byte*>(FIELD_ADDR(
+          this, kHeaderSize + (length() * kCharSize)));
+}
+
+
+template <class T>
+void SetTaintStatus(T* object, size_t idx, TaintType type) {
+  SingleWritingVisitor visitor(type);
+  visitor.run(object, idx, 1);
+}
+
+
+why there is offset in setTaintStatus?
+
+strig builder first
+
+
+
+JSTaintConstants
