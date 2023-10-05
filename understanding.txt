@@ -283,7 +283,6 @@ SlowScanJsonString
 
 
 tainttracking::OnNewFromJsonString(result, *source_);
-JsonString
 
 
 FlattenTaint
@@ -328,5 +327,4 @@ why there is offset in setTaintStatus?
 strig builder first
 
 
-
-JSTaintConstants
+bytecode-graph-builder.cc
