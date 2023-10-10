@@ -328,3 +328,4 @@ strig builder first
 
 
 bytecode-graph-builder.cc
+bytecode-generator.cc

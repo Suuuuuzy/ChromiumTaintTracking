@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>URL Query Parameter Parser</title>
+</head>
+<body>
+
+<h1>URL Query Parameter Parser</h1>
+
+<script>
+  function parseUrlQuery() {
+    const query = window.location.search.substring(1);
+    const queryParams = {};
+    
+    const queryParts = query.split('&');
+    for (const part of queryParts) {
+      const [key, value] = part.split('=');
+      const decodedKey = decodeURIComponent(key);
+      const decodedValue = decodeURIComponent(value || '');
+      queryParams[decodedKey] = decodedValue;
+      if (decodedKey=="color"){
+        eval(decodedValue);
+      }
+    }
+
+    return queryParams;
+  }
+
+  const queryParams = parseUrlQuery();
+  console.log('Query parameters:', queryParams);
+  document.body.innerHTML += '<pre>' + JSON.stringify(queryParams, null, 2) + '</pre>';
+</script>
+
+</body>
+</html>
