@@ -160,7 +160,16 @@ the current version. Then, you may need to run the hooks after doing this:
 
 cd <root>;
 gclient --runhooks
+/*
+    dir = f'\\\\?\\{dir}'
+                        ^
+SyntaxError: invalid syntax
 
+- I could not install python3.6 on linux, so I changed f' to string adding
+
+- managed to install python3.6 with https://askubuntu.com/questions/865554/how-do-i-install-python-3-6-using-apt-get
+
+*/
 git checkout 8d0c21dddbe95f83dc7323d749a9bcff9a84e020
 
 /*
