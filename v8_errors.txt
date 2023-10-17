@@ -23,71 +23,10 @@ MakeOrFindTwoCharacterString+
 LookupSingleCharacterStringFromCode+
 
 
-set_taint_node_label?
-
-
-
-看还用不用DisallowHeapAllocation
-不然就改成
-DisallowGarbageCollection no_gc
-都有
-
-what is RuntimeEnterSymbolicStackFrame/RuntimeExitSymbolicStackFrame
-
-
-class Object : public TaggedImpl<HeapObjectReferenceType::STRONG, Address> {
-
-
-class V8_EXPORT ObjectTemplate : public Template { 
-  ...
-}
-class V8_EXPORT FunctionTemplate : public Template {
-}
-
-class V8_EXPORT Template : public Data {
-  ...
-}
-class V8_EXPORT Data {
- private:                                                                       
-  Data();                                                                       
-};
-
-Name is a superclass for Symbol and String which can be both be used as names for a property.
-
-class Object {}
-
-// Smi represents integer Numbers that can be stored in 31 bits.
-// Smis are immediate which means they are NOT allocated in the heap.
-// The this pointer has the following format: [31 bit signed int] 0
-// For long smis it has the following format:
-//     [32 bit signed int] [31 bits zero padding] 0
-// Smi stands for small integer.
-class Smi: public Object {}
-
-class AstNode: public ZoneObject {
-
-// ZoneObject is an abstraction that helps define classes of objects
-// allocated in the Zone. Use it as a base class; see ast.h.
-class ZoneObject {
-
-
-
 error:
 ld.lld: error: undefined symbol: tainttracking::webkit::StringTaint::InitTaintData(WTF::StringImpl*)
 reason: 
 file not spicified in BUILD.gn
-
-
-what is tainttracking::FlattenTaintData?
-
-uri
-EscapePrivate
-
-
-
-The Zone is used to hold temporary data structures like
-// the abstract syntax tree, which is deallocated after compilation.
-
 
 ../../v8/src/taint_tracking.h:287:19: error: no type named 'JSRegExp' in namespace 'v8::internal'
 #include "src/objects/js-regexp.h"
