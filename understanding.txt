@@ -25,6 +25,12 @@ datatypes:
 TaintFlag; //uint32_t
 TaintData; // uint_8_t
 
+TaintTrackingStringBufferImpl
+contains a list of TaintData: 
+taint_data_ = TaintData[length]
+
+
+
 // in v8/include/v8.h
 TaintType;
 // TaintType, 0~20 , 32-224: encoding types 
@@ -415,3 +421,53 @@ FunctionLiteral* Parser::DoParseProgram(Isolate* isolate, ParseInfo* info) {
   // background thread. We should not access anything Isolate / heap dependent
   // via ParseInfo, and also not pass it forward. If not on the main thread
   // isolate will be nullptr.
+
+
+in new:
+HeapObject
+HeapObject::kHeaderSize==8
+---------------
+pointer to map |
+size:8         |
+---------------
+kTaggedSize:8
+
+
+Name
+NameHash uint32 ->4
+12?
+
+
+string
+String::kHeaderSize==16
+---------------
+pointer to map |
+size:8         |
+               |
+hash value     |
+uint32_t       |
+size: 4        |
+               |
+const length:  |
+int32;         |
+size: 4        |
+---------------
+
+externl string
+
+in old:
+Object::kHeaderSize==0
+
+HeapObject::kHeaderSize==8
+
+
+Name::kSize==24
+hash filed -> 8
+taint filed int64 -> 8
+
+
+add one pointer, size 8
+String::kSize==32
+
+
+v8::internal::SeqString kHeaderSize==32

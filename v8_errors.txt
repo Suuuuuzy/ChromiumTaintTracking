@@ -731,3 +731,31 @@ done
 
 
 change to description
+
+
+replace
+MUST_USE_RESULT
+with 
+V8_WARN_UNUSED_RESULT
+
+change string max length
+  // static constexpr int kMaxLength =
+      // internal::kApiSystemPointerSize == 4 ? (1 << 28) - 16 : (1 << 29) - 24;
+  static constexpr int kMaxLength =
+      internal::kApiSystemPointerSize == 4 ? (1 << 28) - 18 : (1 << 29) - 26;
+
+
+
+../../src/objects/string.h:838:3: error: static_assert failed due to requirement 'kResourceOffset == Internals::kStringResourceOffset' "kResourceOffset == Internals::kStringResourceOffset"
+  STATIC_ASSERT(kResourceOffset == Internals::kStringResourceOffset);
+  ^             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../../src/base/macros.h:189:29: note: expanded from macro 'STATIC_ASSERT'
+#define STATIC_ASSERT(test) static_assert(test, #test)
+
+inside
+class ExternalString : public String
+
+
+Internals::kStringResourceOffset =
+      2 * kApiTaggedSize + 2 * kApiInt32Size;
+

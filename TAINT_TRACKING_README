@@ -182,6 +182,16 @@ ValueError: invalid assignment: overrides var 'recursedeps' (file '/home/suzy/ch
 
 comment recursedeps in DEPS and run again.
 
+
+ImportError: No module named queue
+
+this is due to python2-3 version
+change to:
+try: 
+    import queue
+except ImportError:
+    import Queue as queue
+
 gclient sync --with_branch_heads -D --force
 
 */
@@ -285,6 +295,7 @@ Run from the root directory:
 
 v8/tools/run-tests.py --mode=debug --arch=x64 cctest/test-taint-tracking/\* --shell-dir=$(pwd)/out/Debug
 
+tools/run-tests.py --outdir=out/x86.debug cctest/test-taint-tracking/* 
 
 
 Common issues
