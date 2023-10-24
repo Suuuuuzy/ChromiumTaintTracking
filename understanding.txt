@@ -423,7 +423,7 @@ FunctionLiteral* Parser::DoParseProgram(Isolate* isolate, ParseInfo* info) {
   // isolate will be nullptr.
 
 
-in new:
+==========in new========
 HeapObject
 HeapObject::kHeaderSize==8
 ---------------
@@ -433,9 +433,10 @@ size:8         |
 kTaggedSize:8
 
 
-Name
+Name ->12
 NameHash uint32 ->4
-12?
+taint filed -> 8
+->20
 
 
 string
@@ -455,7 +456,7 @@ size: 4        |
 
 externl string
 
-in old:
+=========in old=========
 Object::kHeaderSize==0
 
 HeapObject::kHeaderSize==8
@@ -463,10 +464,9 @@ HeapObject::kHeaderSize==8
 
 Name::kSize==24
 hash filed -> 8
-taint filed int64 -> 8
+static const int64_t DEFAULT_TAINT_INFO = 0; -> 8
 
-
-add one pointer, size 8
+add one length, size 8
 String::kSize==32
 
 
