@@ -759,3 +759,31 @@ class ExternalString : public String
 Internals::kStringResourceOffset =
       2 * kApiTaggedSize + 2 * kApiInt32Size;
 
+
+
+# Fatal error in ../../src/snapshot/deserializer.cc, line 1145
+# Debug check failed: object_size <= previous_allocation_size_ (20 vs. 16).
+DCHECK_LE(object_size, previous_allocation_size_);
+
+change string.tq, solved
+
+
+String value jianjia in string: get [Symbol.toStringTag]
+String value jianjia: get [Symbol.toStringTag]
+Taint tracking memory error: 190
+String length: 24
+String type: CONS_ONE_BYTE_STRING_TYPE
+String value: get [Symbol.toStringTag]
+
+
+
+factory->to_string_tag_symbol()
+return symbol
+1. ignore this
+2. change the return type to string
+
+related to IncrementalStringBuilder
+
+Handle<String> current_part_;
+Handle<SeqOneByteString> part =
+    Handle<SeqOneByteString>::cast(current_part_);
