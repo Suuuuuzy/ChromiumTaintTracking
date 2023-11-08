@@ -1,20 +1,21 @@
   # export CHROMEDIR="/home/billy/docs/source/chromium_taint_tracking/src";
-  export CHROMEDIR="/home/suzy/nwjs/src"
+export CHROMEDIR="/home/suzy/nwjs/src"
 
-  export SYSROOT="$CHROMEDIR/build/linux/debian_sid_amd64-sysroot"
-  export CXX="$CHROMEDIR/third_party/llvm-build/Release+Asserts/bin/clang++";
-  export CC="$CHROMEDIR/third_party/llvm-build/Release+Asserts/bin/clang"
+export SYSROOT="$CHROMEDIR/build/linux/debian_sid_amd64-sysroot"
+export CXX="$CHROMEDIR/third_party/llvm-build/Release+Asserts/bin/clang++";
+export CC="$CHROMEDIR/third_party/llvm-build/Release+Asserts/bin/clang"
 
-  export CXXFLAGS="--sysroot=$SYSROOT -O3 -B$CHROMEDIR/third_party/binutils/Linux_x64/Release/bin -std=c++11 -D_GLIBCXX_USE_CLOCK_REALTIME";
+# export CXXFLAGS="--sysroot=$SYSROOT -g -B$CHROMEDIR/third_party/binutils/Linux_x64/Release/bin -std=c++11 -D_GLIBCXX_USE_CLOCK_REALTIME";
+export CXXFLAGS="--sysroot=$SYSROOT -O3 -B$CHROMEDIR/third_party/binutils/Linux_x64/Release/bin -std=c++11 -D_GLIBCXX_USE_CLOCK_REALTIME";
 
-  export LDFLAGS="-B$CHROMEDIR/third_party/binutils/Linux_x64/Release/bin"
-  export LDFLAGS="-L$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/lib/x86_64-linux-gnu -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/lib/x86_64-linux-gnu -L$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib/x86_64-linux-gnu -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib/x86_64-linux-gnu -L$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib -Wl,-rpath-link=$CHROMEDIR/out/Debug -B$CHROMEDIR/third_party/binutils/Linux_x64/Release/bin -L$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib/gcc/x86_64-linux-gnu/10 -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib/gcc/x86_64-linux-gnu/10"
+# export LDFLAGS="-B$CHROMEDIR/third_party/binutils/Linux_x64/Release/bin"
+export LDFLAGS="-L$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/lib/x86_64-linux-gnu -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/lib/x86_64-linux-gnu -L$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib/x86_64-linux-gnu -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib/x86_64-linux-gnu -L$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib -Wl,-rpath-link=$CHROMEDIR/out/Debug -B$CHROMEDIR/third_party/binutils/Linux_x64/Release/bin -L$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib/gcc/x86_64-linux-gnu/10 -Wl,-rpath-link=$CHROMEDIR/build/linux/debian_sid_amd64-sysroot/usr/lib/gcc/x86_64-linux-gnu/10"
 
-  cd c++
-  autoreconf -i
-  ./configure --with-sysroot="$SYSROOT" --prefix="/home/suzy/Documents/capnproto-install-clang"
-  make -j8 check
-  sudo make install
+cd c++
+autoreconf -i
+./configure --with-sysroot="$SYSROOT" --prefix="/home/suzy/Documents/capnproto-install-clang-v8"
+make -j8 check
+sudo make install
 
 export LD_RUN_PATH="$LD_RUN_PATH:$CAPNP_INSTALL/lib"
 

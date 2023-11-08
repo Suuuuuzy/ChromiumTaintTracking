@@ -787,3 +787,5 @@ related to IncrementalStringBuilder
 Handle<String> current_part_;
 Handle<SeqOneByteString> part =
     Handle<SeqOneByteString>::cast(current_part_);
+
+
